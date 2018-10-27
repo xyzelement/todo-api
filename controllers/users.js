@@ -40,8 +40,18 @@ module.exports = {
   tasks: async (req, res, next) => {
     const email = req.user.email;
     const tasks = await Task.find({ email });
-    console.log(email, tasks);
     res.json({ tasks });
+  },
+
+  //TODO: this should also be in the Tasks controller
+  addTask: async (req, res, next) => {
+    const email = req.user.email;
+    const action = req.value.body.action;
+    const star = req.value.body.star;
+    const done = req.value.body.done;
+    const newTask = new Task({ email, action, star, done });
+    await newTask.save();
+    res.json({ saved: newTask });
   }
 };
 

@@ -42,4 +42,12 @@ router
   .route("/tasks")
   .get(passport.authenticate("jwt", { session: false }), UsersController.tasks);
 
+router
+  .route("/task")
+  .post(
+    validateBody(schemas.taskSchema),
+    passport.authenticate("jwt", { session: false }),
+    UsersController.addTask
+  );
+
 module.exports = router;

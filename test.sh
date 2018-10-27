@@ -10,6 +10,11 @@ resp=`curl --silent --header "Authorization: jwt $token" localhost:3000/users/se
 echo $resp
 
 echo
-echo "TEST TASKS ... "
+echo "TEST GET ALLTASKS ... "
 resp=`curl --silent --header "Authorization: jwt $token" localhost:3000/users/tasks`
+echo $resp
+
+echo
+echo "TEST ADD TASK "
+resp=`curl --silent --header "Authorization: jwt $token" -X POST -H "Content-Type: application/json" -d '{"action": "adding this test task"}' localhost:3000/users/task`
 echo $resp

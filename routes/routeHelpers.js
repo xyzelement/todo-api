@@ -22,6 +22,11 @@ module.exports = {
         .email()
         .required(),
       password: Joi.string().required()
+    }),
+    taskSchema: Joi.object().keys({
+      action: Joi.string().required(),
+      star: Joi.bool(),
+      done: Joi.bool()
     })
   }
 };

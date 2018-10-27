@@ -26,3 +26,12 @@ Tools: robomongo
 - create a configuration file to track out globals
 - in users controller - respond with signed token on signup.
 - note, the controller is doing all the main work. route just sends to controller after validation
+
+- add passport, -jwt and -local strategies.
+- passport-jwt is for checking tokens that we returned in signin or signup
+- passport-local is for exchanging login info for token info in signin
+- passport.js installs passport middleware for jwt and local strategies.
+  - for jwt - the "schema" tells passport how to get the token out of the headers, incl. secret
+  - the function then gets the parsed header payload, in which we find id/email and checks against db
+  - for local: I guess it expects it in body json so we tell it how to process it (ie which field is the username)
+- in routes, the secret is now guarded by the jwt authentication strategy

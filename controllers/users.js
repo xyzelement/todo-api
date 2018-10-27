@@ -18,14 +18,16 @@ module.exports = {
 
     // Respond with token
     const token = signToken(newUser);
-
     res.status(200).json({ token });
   },
 
-  signin: async (req, res, next) => {},
+  signin: async (req, res, next) => {
+    // exchange user info for token
+  },
 
   secret: async (req, res, next) => {
     console.log("UsersCountroller: secret");
+    res.json({ secret: "Here's my terrible secret" });
   }
 };
 

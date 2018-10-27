@@ -35,3 +35,12 @@ Tools: robomongo
   - the function then gets the parsed header payload, in which we find id/email and checks against db
   - for local: I guess it expects it in body json so we tell it how to process it (ie which field is the username)
 - in routes, the secret is now guarded by the jwt authentication strategy
+
+- added bcryptjs (TODO: in prod want to use bcrypt non-js - faster)
+- bcrypt generates salt, hashes using salt, and compares hash to plain
+- in the model we added a pre to salt and hash the password prior to saving to db
+- in model also added a password validator that compres plain text against the salt-and-hashed one
+- TODO: is bcrypt one way hashing OK or do we need some sort of our own thing on top of that? meaning - no "secret" of ours is used for hash/check
+- signin controller now returns the hashed token on valid signin
+- the signin route is now protected by local passport strategy
+- local strategy in passport.js now checks password vs stored hash (using model) and returns model if valid

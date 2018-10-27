@@ -13,7 +13,17 @@ require("../passport");
 router
   .route("/signup")
   .post(validateBody(schemas.authenticationSchema), UsersController.signup);
-router.route("/signin").post(UsersController.signin);
+
+// for Signin, first we validateBody to confirm we've got the
+// email and password fields. Then we authenticate against the
+// local DB and finally call controller.signin
+router
+  .route("/signin")
+  .post(
+    validateBody(schemas.authenticationSchema),
+    passport.authenticate("local", { session: false }),
+    UsersController.signin
+  );
 
 // This is the route that's passport protected.
 // JWT authentication acts as the gatekeeper to

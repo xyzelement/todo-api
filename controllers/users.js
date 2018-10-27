@@ -22,7 +22,13 @@ module.exports = {
   },
 
   signin: async (req, res, next) => {
-    // exchange user info for token
+    // So if we got this far, we expect that there's a req.user
+    // that corresponds to the user model object we returned in
+    // passport-local on success. Ie, the following line only
+    // works if we expect the passport-local strategy to have
+    // executed before.
+    const token = signToken(req.user);
+    res.status(200).json({ token });
   },
 
   secret: async (req, res, next) => {

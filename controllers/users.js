@@ -1,5 +1,6 @@
 const JWT = require("jsonwebtoken");
 const User = require("../models/user");
+const Task = require("../models/task");
 const config = require("../configuration");
 
 module.exports = {
@@ -33,6 +34,14 @@ module.exports = {
 
   secret: async (req, res, next) => {
     res.json({ secret: "Here's my terrible secret. I am: " + req.user.email });
+  },
+
+  //TODO: this should be in the Tasks controller
+  tasks: async (req, res, next) => {
+    const email = req.user.email;
+    const tasks = await Task.find({ email });
+    console.log(email, tasks);
+    res.json({ tasks });
   }
 };
 

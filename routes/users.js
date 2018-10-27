@@ -37,4 +37,9 @@ router
     UsersController.secret
   );
 
+//TODO: this should be in a TASK routes
+router
+  .route("/tasks")
+  .get(passport.authenticate("jwt", { session: false }), UsersController.tasks);
+
 module.exports = router;

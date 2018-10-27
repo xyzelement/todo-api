@@ -4,3 +4,7 @@ The TODO Api project
 
 2018.10.27
 - npm init
+- use morgan middleware for logging of requests
+- use body parser to parse out json into req.body
+- use express-promise-router to avoid try/catch everywhere
+- define routes and controllers in separate folders

@@ -32,8 +32,7 @@ module.exports = {
   },
 
   secret: async (req, res, next) => {
-    console.log("UsersCountroller: secret");
-    res.json({ secret: "Here's my terrible secret" });
+    res.json({ secret: "Here's my terrible secret. I am: " + req.user.email });
   }
 };
 

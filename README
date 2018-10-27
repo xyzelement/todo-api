@@ -8,3 +8,8 @@ The TODO Api project
 - use body parser to parse out json into req.body
 - use express-promise-router to avoid try/catch everywhere
 - define routes and controllers in separate folders
+
+npm run start-dev
+- added nodemon and a script
+- added joi for schema validation
+- created a helper to use joi to validate the schema, as middleware, before calling the controller

@@ -1,0 +1,26 @@
+{
+  "name": "todo-api",
+  "version": "1.0.0",
+  "description": "The TODO Api project",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-promise-router": "^3.0.3",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xyzelement/todo-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xyzelement/todo-api/issues"
+  },
+  "homepage": "https://github.com/xyzelement/todo-api#readme"
+}

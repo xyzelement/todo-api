@@ -21,3 +21,8 @@ Tools: robomongo
 - created models/user which defines the schema for one user
 - also User model exports the collection of users
 - in controllers/user, use User model to check exists/save user 
+
+- use jsonwebtoken(JWT) to sign tokens with a secret. 
+- create a configuration file to track out globals
+- in users controller - respond with signed token on signup.
+- note, the controller is doing all the main work. route just sends to controller after validation

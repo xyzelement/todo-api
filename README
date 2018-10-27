@@ -12,4 +12,12 @@ The TODO Api project
 npm run start-dev
 - added nodemon and a script
 - added joi for schema validation
-- created a helper to use joi to validate the schema, as middleware, before calling the controller
+- created a helper to use joi to validate the schema, 
+  as middleware, before calling the controller
+
+Tools: robomongo
+- added mongoose - cool for modeling mongodb
+- in app.js connect to loclahost db TODO
+- created models/user which defines the schema for one user
+- also User model exports the collection of users
+- in controllers/user, use User model to check exists/save user 

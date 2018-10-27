@@ -1,7 +1,7 @@
 const express = require("express");
 const router = require("express-promise-router")();
 const UsersController = require("../controllers/users");
-const { validateBody, schemas } = require("../helpers/routeHelpers");
+const { validateBody, schemas } = require("./routeHelpers");
 const passport = require("passport");
 
 // We don't use this variable but this does cause passport

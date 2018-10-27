@@ -15,7 +15,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start-dev": "nodemon app.js"
+    "start-dev": "nodemon --no-deprecation app.js"
   },
   "repository": {
     "type": "git",

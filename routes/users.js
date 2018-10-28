@@ -10,6 +10,8 @@ const passport = require("passport");
 //const passportConf =
 require("../passport");
 
+const authenticateWithJwt = passport.authenticate("jwt", { session: false });
+
 router
   .route("/signup")
   .post(validateBody(schemas.authenticationSchema), UsersController.signup);
@@ -30,28 +32,21 @@ router
 // UsersController.secret function. Session: false
 // seems just like an optimization since we're
 // writing an API and there won't be any sessions.
-router
-  .route("/secret")
-  .get(
-    passport.authenticate("jwt", { session: false }),
-    UsersController.secret
-  );
+router.route("/secret").get(authenticateWithJwt, UsersController.secret);
 
 //TODO: this should be in a TASK routes
-router
-  .route("/tasks")
-  .get(passport.authenticate("jwt", { session: false }), UsersController.tasks);
+router.route("/tasks").get(authenticateWithJwt, UsersController.tasks);
 
 router
   .route("/task")
   .post(
     validateBody(schemas.taskAddSchema),
-    passport.authenticate("jwt", { session: false }),
+    authenticateWithJwt,
     UsersController.addTask
   )
   .delete(
     validateBody(schemas.taskDeleteSchema),
-    passport.authenticate("jwt", { session: false }),
+    authenticateWithJwt,
     UsersController.deleteTask
   );
 

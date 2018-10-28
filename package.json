@@ -2,10 +2,11 @@
   "name": "todo-api",
   "version": "1.0.0",
   "description": "The TODO Api project",
-  "main": "app.js",
+  "main": "serverapp.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "create-react-app": "^2.0.4",
     "express": "^4.16.4",
     "express-promise-router": "^3.0.3",
     "faker": "^4.1.0",
@@ -24,8 +25,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start-dev": "nodemon --no-deprecation app.js",
-    "test": "nyc mocha -t 2500 --no-deprecation --exit"
+    "start-dev": "nodemon --no-deprecation server/app.js",
+    "test": "nyc mocha -t 2500 --no-deprecation --exit server/test"
   },
   "repository": {
     "type": "git",

@@ -26,6 +26,21 @@ echo $resp
 id=`echo $resp | cut -d: -f5- | cut -d\" -f2`
 
 echo
+echo "TEST UPDATE TASK "
+resp=`curl --silent --header "Authorization: jwt $token" -X PUT -H "Content-Type: application/json" -d "{\"id\": \"$id\", \"done\":true, \"action\":\"UPDATED action\"}" localhost:3000/users/task`
+echo $resp
+
+echo
+echo "TEST UPDATE TASK "
+resp=`curl --silent --header "Authorization: jwt $token" -X PUT -H "Content-Type: application/json" -d "{\"id\": \"111111111111111111111112\", \"done\":true, \"action\":\"UPDATED action\"}" localhost:3000/users/task`
+echo $resp
+
+echo
+echo "TEST GET ALLTASKS ... "
+resp=`curl --silent --header "Authorization: jwt $token" localhost:3000/users/tasks`
+echo $resp
+
+echo
 echo "TEST DELETE TASK "
 resp=`curl --silent --header "Authorization: jwt $token" -X DELETE -H "Content-Type: application/json" -d "{\"id\": \"$id\"}" localhost:3000/users/task`
 echo $resp

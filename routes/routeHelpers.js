@@ -31,6 +31,12 @@ module.exports = {
     }),
     taskDeleteSchema: Joi.object().keys({
       id: Joi.objectId().required()
+    }),
+    taskUpdateSchema: Joi.object().keys({
+      id: Joi.objectId().required(),
+      action: Joi.string(),
+      star: Joi.bool(),
+      done: Joi.bool()
     })
   }
 };

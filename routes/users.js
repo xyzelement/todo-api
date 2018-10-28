@@ -48,6 +48,11 @@ router
     validateBody(schemas.taskDeleteSchema),
     authenticateWithJwt,
     UsersController.deleteTask
+  )
+  .put(
+    validateBody(schemas.taskUpdateSchema),
+    authenticateWithJwt,
+    UsersController.updateTask
   );
 
 module.exports = router;

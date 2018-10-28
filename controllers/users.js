@@ -71,18 +71,27 @@ module.exports = {
   deleteTask: async (req, res, next) => {
     const email = req.user.email;
     const _id = req.value.body.id;
-    Task.deleteOne({ email, _id }, (err, col) => {
-      console.log(err, col);
 
-      if (err) {
-        return res.status(404).json({ error: err });
-      }
+    const result = await Task.deleteOne({ email, _id });
+    return res.json({ success: result });
+  },
 
-      if (col.n === 0) {
-        return res.status(200).json({ error: "Nothing to delete" });
-      }
+  updateTask: async (req, res, next) => {
+    const email = req.user.email;
+    const _id = req.value.body.id;
 
-      return res.json({ success: `Task ${_id} deleted for ${email}` });
-    });
+    const update = {};
+    if (req.value.body.action) {
+      update.action = req.value.body.action;
+    }
+    if (req.value.body.star) {
+      update.star = req.value.body.star;
+    }
+    if (req.value.body.done) {
+      update.done = req.value.body.done;
+    }
+
+    const result = await Task.updateOne({ email, _id }, update);
+    return res.json({ success: result.nModified });
   }
 };

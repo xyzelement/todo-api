@@ -27,13 +27,6 @@ router
     UsersController.signin
   );
 
-// This is the route that's passport protected.
-// JWT authentication acts as the gatekeeper to
-// UsersController.secret function. Session: false
-// seems just like an optimization since we're
-// writing an API and there won't be any sessions.
-router.route("/secret").get(authenticateWithJwt, UsersController.secret);
-
 //TODO: this should be in a TASK routes
 router.route("/tasks").get(authenticateWithJwt, UsersController.tasks);
 

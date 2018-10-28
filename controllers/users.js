@@ -46,10 +46,6 @@ module.exports = {
     res.status(200).json({ token });
   },
 
-  secret: async (req, res, next) => {
-    res.json({ secret: "Here's my terrible secret. I am: " + req.user.email });
-  },
-
   //TODO: this should be in the Tasks controller
   tasks: async (req, res, next) => {
     const email = req.user.email;

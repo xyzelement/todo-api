@@ -3,6 +3,20 @@ const User = require("../models/user");
 const Task = require("../models/task");
 const config = require("../configuration");
 
+function signToken(user) {
+  //This encodes but does not encrypt - so we can
+  //read it later and veirfy it came from us
+  return JWT.sign(
+    {
+      iss: "TODO API",
+      sub: user.email,
+      iat: new Date().getTime(),
+      exp: new Date().setTime(new Date().getTime() + 1) //Expires in one day
+    },
+    config.JWT_SECRET
+  );
+}
+
 module.exports = {
   signup: async (req, res, next) => {
     const { email, password } = req.value.body;
@@ -52,19 +66,23 @@ module.exports = {
     const newTask = new Task({ email, action, star, done });
     await newTask.save();
     res.json({ saved: newTask });
+  },
+
+  deleteTask: async (req, res, next) => {
+    const email = req.user.email;
+    const _id = req.value.body.id;
+    Task.deleteOne({ email, _id }, (err, col) => {
+      console.log(err, col);
+
+      if (err) {
+        return res.status(404).json({ error: err });
+      }
+
+      if (col.n === 0) {
+        return res.status(200).json({ error: "Nothing to delete" });
+      }
+
+      return res.json({ success: `Task ${_id} deleted for ${email}` });
+    });
   }
 };
-
-function signToken(user) {
-  //This encodes but does not encrypt - so we can
-  //read it later and veirfy it came from us
-  return JWT.sign(
-    {
-      iss: "TODO API",
-      sub: user.email,
-      iat: new Date().getTime(),
-      exp: new Date().setTime(new Date().getTime() + 1) //Expires in one day
-    },
-    config.JWT_SECRET
-  );
-}

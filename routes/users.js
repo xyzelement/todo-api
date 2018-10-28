@@ -45,9 +45,14 @@ router
 router
   .route("/task")
   .post(
-    validateBody(schemas.taskSchema),
+    validateBody(schemas.taskAddSchema),
     passport.authenticate("jwt", { session: false }),
     UsersController.addTask
+  )
+  .delete(
+    validateBody(schemas.taskDeleteSchema),
+    passport.authenticate("jwt", { session: false }),
+    UsersController.deleteTask
   );
 
 module.exports = router;

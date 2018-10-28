@@ -1,4 +1,5 @@
 const Joi = require("joi");
+Joi.objectId = require("joi-objectid")(Joi);
 
 module.exports = {
   validateBody: schema => {
@@ -23,10 +24,13 @@ module.exports = {
         .required(),
       password: Joi.string().required()
     }),
-    taskSchema: Joi.object().keys({
+    taskAddSchema: Joi.object().keys({
       action: Joi.string().required(),
       star: Joi.bool(),
       done: Joi.bool()
+    }),
+    taskDeleteSchema: Joi.object().keys({
+      id: Joi.objectId().required()
     })
   }
 };

@@ -1,4 +1,9 @@
 echo
+echo 'TEST SIGNUP ...'
+resp=`curl --silent -H "Content-Type: application/json" -X POST -d '{"email": "ed@ed.com", "password": "ed"}' localhost:3000/users/signup`
+echo $resp
+
+echo
 echo 'TEST SIGNIN ...'
 resp=`curl --silent -H "Content-Type: application/json" -X POST -d '{"email": "ed@ed.com", "password": "ed"}' localhost:3000/users/signin`
 echo $resp

@@ -11,16 +11,19 @@
     "joi": "^14.0.1",
     "joi-objectid": "^2.0.0",
     "jsonwebtoken": "^8.3.0",
+    "mocha": "^5.2.0",
     "mongoose": "^5.3.7",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.5",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "supertest": "^3.3.0"
   },
   "devDependencies": {},
   "scripts": {
-    "start-dev": "nodemon --no-deprecation app.js"
+    "start-dev": "nodemon --no-deprecation app.js",
+    "test": "node_modules/.bin/mocha -t 2500 --no-deprecation --exit"
   },
   "repository": {
     "type": "git",

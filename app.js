@@ -13,14 +13,13 @@ const app = express();
 // Middleware
 
 app.use(bodyParser.json());
-app.use(morgan("dev")); // Only log not in unit tests :)
 
 // Routes
 app.use("/users", require("./routes/users"));
 
-const port = process.env.PORT || 3000;
-
 if (require.main === module) {
+  const port = process.env.PORT || 3000;
+  app.use(morgan("dev")); // Only log not in unit tests :)
   app.listen(port);
   console.log(`Server listening on ${port}`);
 }

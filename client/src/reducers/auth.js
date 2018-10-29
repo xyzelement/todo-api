@@ -1,5 +1,7 @@
 import { AUTH_SIGNUP } from "../actions/types";
 import { AUTH_ERROR } from "../actions/types";
+import { GET_TASKS } from "../actions/types";
+
 const DEFAULT_STATE = {
   isAuthenticated: false,
   jwtToken: "",
@@ -12,7 +14,6 @@ export default (state = DEFAULT_STATE, action) => {
   switch (action.type) {
     case AUTH_SIGNUP:
       // process it
-      console.log("reducer: good");
       return {
         ...state,
         jwtToken: action.payload,
@@ -27,6 +28,9 @@ export default (state = DEFAULT_STATE, action) => {
         isAuthenticated: false,
         errorMsg: action.payload
       };
+    case GET_TASKS:
+      console.log("got event GET_TASKS", action.payload);
+      return { ...state, abc: action.payload };
     default:
       return state; // No change to state from weird actions
   }

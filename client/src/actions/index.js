@@ -1,13 +1,14 @@
 import axios from "axios";
 import { AUTH_SIGNUP } from "./types";
 import { AUTH_ERROR } from "./types";
+import { GET_TASKS } from "./types";
 /*
     Redux handles all this:
     ActionCreatrs => create/return Actions -> dispatched -> Middlewares -> reducers
     The actions can have access to dispatchers?
 */
 
-export const signUp = formData => {
+export const signUpAction = formData => {
   return async dispatch => {
     /*
         Step 1: use formData to make http req to backend 
@@ -29,6 +30,19 @@ export const signUp = formData => {
         type: AUTH_ERROR,
         payload: "Email is bad?!"
       });
+    }
+  };
+};
+
+export const getTasksAction = formData => {
+  return async dispatch => {
+    try {
+      const res = await axios.get("http://localhost:5000/users/tasks", {
+        headers: { Authorization: "jwt " + localStorage.getItem("JWT_TOKEN") }
+      });
+      dispatch({ type: GET_TASKS, payload: res });
+    } catch (error) {
+      console.log("error here", error);
     }
   };
 };

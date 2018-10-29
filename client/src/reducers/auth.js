@@ -21,7 +21,6 @@ export default (state = DEFAULT_STATE, action) => {
         errorMsg: ""
       };
     case AUTH_ERROR:
-      console.log("reducer: bad");
       return {
         ...state,
         jwtToken: "",
@@ -29,8 +28,7 @@ export default (state = DEFAULT_STATE, action) => {
         errorMsg: action.payload
       };
     case GET_TASKS:
-      console.log("got event GET_TASKS", action.payload);
-      return { ...state, abc: action.payload };
+      return { ...state, tasks: action.payload };
     default:
       return state; // No change to state from weird actions
   }

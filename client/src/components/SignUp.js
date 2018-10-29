@@ -17,9 +17,6 @@ class SignUp extends Component {
     //ActionCreater - will manipulate state via auth reducer
     //Signup in this case is the action creator
     await this.props.signUpAction(formData);
-
-    //TODO: I suspect this is the worst place to be calling this form
-    await this.props.getTasksAction(formData);
   }
 
   // This returns the JSX which is like a templating thing

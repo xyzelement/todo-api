@@ -14,9 +14,6 @@ class SignUp extends Component {
   // This is simply our onSubmit callback, where
   // we're going to actually call the API
   async onSubmit(formData) {
-    console.log("onSubmit() called");
-    console.log(formData);
-
     //ActionCreater - will manipulate state via auth reducer
     //Signup in this case is the action creator
     await this.props.signUp(formData);

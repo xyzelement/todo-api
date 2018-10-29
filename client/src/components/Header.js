@@ -1,14 +1,42 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { compose } from "redux";
 
-export default class Header extends Component {
+class Header extends Component {
+  headerHelper(props) {
+    if (props.auth.isAuthenticated) {
+      return (
+        <span>
+          <Link to="/dashboard">Dashboard</Link>*
+          <Link to="/signout">SignOut</Link>
+        </span>
+      );
+    } else {
+      return (
+        <span>
+          <Link to="/signup">SignUp</Link>*<Link to="/signin">SignIn</Link>*
+        </span>
+      );
+    }
+  }
+
   render() {
     return (
       <nav>
-        MY TODO *<Link to="/dashboard">Dashboard</Link>*
-        <Link to="/signup">SignUp</Link>*<Link to="/signin">SignIn</Link>*
-        <Link to="/signout">SignOut</Link>
+        MY TODO *<b>{this.headerHelper(this.props)}</b>
       </nav>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return { auth: state.auth };
+};
+
+export default compose(
+  connect(
+    mapStateToProps,
+    null
+  )(Header)
+);

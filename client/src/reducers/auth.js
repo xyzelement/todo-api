@@ -15,7 +15,7 @@ export default (state = DEFAULT_STATE, action) => {
       console.log("reducer: good");
       return {
         ...state,
-        token: action.payload,
+        jwtToken: action.payload,
         isAuthenticated: true,
         errorMsg: ""
       };
@@ -23,7 +23,7 @@ export default (state = DEFAULT_STATE, action) => {
       console.log("reducer: bad");
       return {
         ...state,
-        token: "",
+        jwtToken: "",
         isAuthenticated: false,
         errorMsg: action.payload
       };

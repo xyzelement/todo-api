@@ -44,3 +44,13 @@ Tools: robomongo
 - signin controller now returns the hashed token on valid signin
 - the signin route is now protected by local passport strategy
 - local strategy in passport.js now checks password vs stored hash (using model) and returns model if valid
+
+On the REACT Branch:
+- added CORS to handle that cross-site stuff.
+- axios: for making the HTTP requests from the client
+- react for ... react
+- react-redux: https://www.sohamkamani.com/blog/2017/03/31/react-redux-connect-explained/
+  - gives us Provider - which is the magic pill for store availability
+  - gives us connect is basically I guess a way to hook up state to react props
+- redux-form helps manage form state using redux
+- redux-thunk lets us dispatch asynchronous redux actions.

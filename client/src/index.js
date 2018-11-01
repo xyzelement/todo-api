@@ -15,6 +15,16 @@ import Tasks from "./components/Tasks";
 
 import reducers from "./reducers";
 
+//TODO: is this the right place?
+import "./App.css";
+
+const initialState = {
+  auth: {
+    jwtToken: localStorage.getItem("JWT_TOKEN"),
+    isAuthenticated: localStorage.getItem("JWT_TOKEN") ? true : false
+  }
+};
+
 ReactDOM.render(
   // This is our router component, it's asking the App
   // component to set its content to the Home component.
@@ -37,7 +47,10 @@ ReactDOM.render(
   // method, which is then used to dispatch regular
   // synchronous actions inside the body of the function
   // once the asynchronous operations have completed.
-  <Provider store={createStore(reducers, {}, applyMiddleware(reduxThunk))}>
+
+  <Provider
+    store={createStore(reducers, initialState, applyMiddleware(reduxThunk))}
+  >
     <BrowserRouter>
       <App>
         <Route exact path="/" component={Home} />

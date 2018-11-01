@@ -1,12 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
-
+import * as actions from "../actions";
 import Task from "./Task";
 
 class Tasks extends React.Component {
-  renderTasks() {
-    if (!this.props.tasks) return <b>Done or dead/</b>;
+  constructor(props) {
+    super(props);
+    //  this.onSubmit = this.onSubmit.bind(this);
+  }
 
+  componentWillMount() {
+    //TODO: I suspect this is the worst place to be calling this form
+    this.props.getTasksAction();
+  }
+
+  renderTasks() {
+    if (!this.props.tasks) return null;
     return this.props.tasks.map(task => <Task key={task._id} task={task} />);
   }
 
@@ -24,5 +33,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  null //,mapDispatchToProps
+  actions
 )(Tasks);

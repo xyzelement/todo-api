@@ -8,13 +8,17 @@ class Header extends Component {
     if (props.auth.isAuthenticated) {
       return (
         <span>
-          <Link to="/tasks">Tasks</Link>*<Link to="/signout">SignOut</Link>
+          <Link to="/tasks">Tasks</Link>
+          &nbsp;
+          <Link to="/signout">Sign Out</Link>
         </span>
       );
     } else {
       return (
         <span>
-          <Link to="/signup">SignUp</Link>*<Link to="/signin">SignIn</Link>*
+          <Link to="/signup">Sign Up</Link>
+          &nbsp;
+          <Link to="/signin">Sign In</Link>*
         </span>
       );
     }
@@ -23,7 +27,9 @@ class Header extends Component {
   render() {
     return (
       <nav>
-        MY TODO *<b>{this.headerHelper(this.props)}</b>
+        {this.headerHelper(this.props)}
+        <br />
+        <br />
       </nav>
     );
   }

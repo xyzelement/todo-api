@@ -18,21 +18,12 @@ class SignIn extends Component {
     //ActionCreater - will manipulate state via auth reducer
     //Signup in this case is the action creator
     await this.props.signInAction(formData);
-
-    //TODO: I suspect this is the worst place to be calling this form
-    await this.props.getTasksAction(formData);
   }
 
   helper() {
-    if (this.props.tasks) {
+    if (this.props.isAuthenticated) {
       return <Redirect to="/tasks" />;
     }
-
-    return this.props.tasks ? (
-      <b>There are {this.props.tasks.length} tasks</b>
-    ) : (
-      <b />
-    );
   }
 
   render() {
@@ -70,7 +61,7 @@ class SignIn extends Component {
 }
 
 function mapStateToProps(state) {
-  return { tasks: state.auth.tasks };
+  return { isAuthenticated: state.auth.isAuthenticated };
 }
 
 export default compose(

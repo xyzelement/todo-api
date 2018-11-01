@@ -8,8 +8,7 @@ class Header extends Component {
     if (props.auth.isAuthenticated) {
       return (
         <span>
-          <Link to="/dashboard">Dashboard</Link>*
-          <Link to="/signout">SignOut</Link>
+          <Link to="/tasks">Tasks</Link>*<Link to="/signout">SignOut</Link>
         </span>
       );
     } else {

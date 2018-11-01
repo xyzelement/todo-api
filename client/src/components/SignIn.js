@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
+
+import { Redirect } from "react-router-dom";
+
 import { connect } from "react-redux";
 import { compose } from "redux";
 import CustomInput from "./CustomInput";
@@ -21,6 +24,10 @@ class SignIn extends Component {
   }
 
   helper() {
+    if (this.props.tasks) {
+      return <Redirect to="/tasks" />;
+    }
+
     return this.props.tasks ? (
       <b>There are {this.props.tasks.length} tasks</b>
     ) : (

@@ -3,7 +3,7 @@ import { AUTH_SIGNUP } from "./types";
 import { AUTH_ERROR } from "./types";
 import { GET_TASKS } from "./types";
 import { AUTH_SIGNOUT } from "./types";
-import { UPDATE_TASKS } from "./types";
+import { UPDATE_TASKS, ADD_TASK } from "./types";
 /*
     Redux handles all this:
     ActionCreatrs => create/return Actions -> dispatched -> Middlewares -> reducers
@@ -98,6 +98,27 @@ export const updateTaskAction = (token, id, update) => {
       dispatch({ type: UPDATE_TASKS, payload: { id, update } });
     } catch (error) {
       console.log("updateTaskAction error", error, token, id, update);
+    }
+  };
+};
+
+export const addTaskAction = (token, update) => {
+  return async dispatch => {
+    try {
+      console.log("addTaskAction: ", token, update);
+
+      const res = await axios.post("http://localhost:5000/users/task", update, {
+        headers: { Authorization: "jwt " + token }
+      });
+      console.log("addTaskAction: response", res);
+
+      if (res.data.saved) {
+        dispatch({ type: ADD_TASK, payload: res.data.saved });
+      } else {
+        console.log("addTaskAction DID NOT SAVE", res);
+      }
+    } catch (error) {
+      console.log("addTaskAction error", error, token, update);
     }
   };
 };

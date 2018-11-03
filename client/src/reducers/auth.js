@@ -1,6 +1,6 @@
 import { AUTH_SIGNUP, AUTH_SIGNOUT, UPDATE_TASKS } from "../actions/types";
 import { AUTH_ERROR } from "../actions/types";
-import { GET_TASKS } from "../actions/types";
+import { GET_TASKS, ADD_TASK } from "../actions/types";
 
 const DEFAULT_STATE = {
   isAuthenticated: false,
@@ -50,6 +50,12 @@ export default (state = DEFAULT_STATE, action) => {
 
       return out;
 
+    case ADD_TASK:
+      console.log("Auth: ADD_TASK", action.payload);
+      var out_state = { ...state };
+      out_state.tasks = [...state.tasks];
+      out_state.tasks.push(action.payload);
+      return out_state;
     default:
       return state; // No change to state from weird actions
   }

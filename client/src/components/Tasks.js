@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import Task from "./Task";
+import AddTask from "./AddTask";
 
 class Tasks extends React.Component {
   componentWillMount() {
@@ -15,7 +16,12 @@ class Tasks extends React.Component {
   }
 
   render() {
-    return <div className="container">{this.renderTasks()}</div>;
+    return (
+      <div className="container">
+        {this.renderTasks()}
+        <AddTask />
+      </div>
+    );
   }
 }
 

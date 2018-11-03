@@ -24,8 +24,8 @@ export const signUpAction = formData => {
         formData
       );
 
-      dispatch({ type: AUTH_SIGNUP, payload: res.data.token });
       localStorage.setItem("JWT_TOKEN", res.data.token);
+      dispatch({ type: AUTH_SIGNUP, payload: res.data.token });
     } catch (error) {
       dispatch({
         type: AUTH_ERROR,
@@ -37,10 +37,10 @@ export const signUpAction = formData => {
 
 export const signOutAction = () => {
   return dispatch => {
-    console.log("signOutAction: about to dispatch AUTH_SIGNOUT");
-    dispatch({ type: AUTH_SIGNOUT });
     console.log("signOutAction: about to remove TOKEN from local storage");
     localStorage.removeItem("JWT_TOKEN");
+    console.log("signOutAction: about to dispatch AUTH_SIGNOUT");
+    dispatch({ type: AUTH_SIGNOUT });
   };
 };
 
@@ -68,24 +68,17 @@ export const signInAction = formData => {
   };
 };
 
-export const getTasksAction = formData => {
+export const getTasksAction = token => {
   return async dispatch => {
     try {
-      console.log(
-        "getTasksAction: TOKEN from local" +
-          localStorage.getItem("JWT_TOKEN").length
-      );
+      console.log("getTasksAction: TOKEN" + token.length);
       const res = await axios.get("http://localhost:5000/users/tasks", {
-        headers: { Authorization: "jwt " + localStorage.getItem("JWT_TOKEN") }
+        headers: { Authorization: "jwt " + token }
       });
       console.log("getTasksAction: about to dispatch GET_TASKS");
       dispatch({ type: GET_TASKS, payload: res.data.tasks });
     } catch (error) {
-      console.log(
-        "getTasksAction error",
-        error,
-        localStorage.getItem("JWT_TOKEN")
-      );
+      console.log("getTasksAction error", error, token);
     }
   };
 };

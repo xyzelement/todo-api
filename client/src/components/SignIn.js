@@ -21,16 +21,7 @@ class SignIn extends Component {
   }
 
   helper() {
-    console.log(
-      "SignIn: helper: isAuthenticated: ",
-      this.props.auth.isAuthenticated
-    );
     if (this.props.auth.isAuthenticated) {
-      console.log(
-        "SignIn: helper: has token?: ",
-        this.props.auth.jwtToken.length
-      );
-
       return <Redirect to="/tasks" />;
     }
   }

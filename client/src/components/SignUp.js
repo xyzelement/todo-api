@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import CustomInput from "./CustomInput";
 import * as actions from "../actions";
+import { Redirect } from "react-router-dom";
+
 // This component represents the signup page
 class SignUp extends Component {
   constructor(props) {
@@ -19,8 +21,12 @@ class SignUp extends Component {
     await this.props.signUpAction(formData);
   }
 
-  // This returns the JSX which is like a templating thing
-  // and JS budled together.
+  helper() {
+    if (this.props.auth.isAuthenticated) {
+      return <Redirect to="/tasks" />;
+    }
+  }
+
   render() {
     // This, I don't quite understand. For some reason we
     // need to use handleSubmit from redux-form instead of
@@ -31,6 +37,7 @@ class SignUp extends Component {
     // CSS classes to it later...
     return (
       <div>
+        <b>{this.helper()}</b>
         <form onSubmit={handleSubmit(this.onSubmit)}>
           <fieldset>
             <Field
@@ -59,17 +66,14 @@ class SignUp extends Component {
   }
 }
 
-// This just means that what this module ultimately exports
-// is not the SignUp class but a reduxForm based on this
-// class. Then we're saying that "signup" is
-// "the name of your form and the key to where your form's
-// state will be mounted under the redux-form reducer"
+function mapStateToProps(state) {
+  return { auth: state.auth };
+}
+
 export default compose(
   connect(
-    null,
+    mapStateToProps,
     actions
   ),
   reduxForm({ form: "signup" })
 )(SignUp);
-
-//export default reduxForm({ form: "signup" })(SignUp);

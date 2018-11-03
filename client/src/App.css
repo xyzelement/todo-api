@@ -10,6 +10,11 @@ body {
   color: gainsboro;
 }
 
+.custom-input-box {
+  border-width: 0px;
+  border-bottom-width: 1px;
+}
+
 .star-on a {
   color: black;
 }

@@ -15,26 +15,28 @@ class AddTask extends Component {
     //ActionCreater - will manipulate state via auth reducer
     //Signup in this case is the action creator
     //await this.props.signUpAction(formData);
+    const { reset } = this.props;
     console.log("AddTask: onSubmit", formData);
     await this.props.addTaskAction(this.props.auth.jwtToken, formData);
+    reset();
   }
   render() {
     const { handleSubmit } = this.props;
     return (
       <div>
         <form onSubmit={handleSubmit(this.onSubmit)}>
-          <fieldset>
-            <Field
-              name="action"
-              type="text"
-              id="action"
-              label="Action"
-              placeholder="Do This"
-              component={CustomInput}
-            />
-          </fieldset>
+          <Field
+            name="action"
+            type="text"
+            id="action"
+            label=""
+            placeholder="Add an action to do"
+            component={CustomInput}
+          />
 
-          <button type="submit">Add It</button>
+          {
+            //<button type="submit">Add It</button>
+          }
         </form>
       </div>
     );

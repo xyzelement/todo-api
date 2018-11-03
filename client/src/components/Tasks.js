@@ -18,8 +18,9 @@ class Tasks extends React.Component {
   render() {
     return (
       <div className="container">
-        {this.renderTasks()}
         <AddTask />
+        <br />
+        {this.renderTasks()}
       </div>
     );
   }

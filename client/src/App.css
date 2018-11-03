@@ -28,3 +28,20 @@ body {
   font-family: monospace;
   font-size: 1.6em;
 }
+
+.action input {
+  width: 80%;
+  border-width: 0px;
+  font-family: monospace;
+  font-size: 1em;
+}
+
+.action input:read-write {
+  border-bottom-width: 2px;
+  font-weight: bold;
+}
+
+form {
+  font-size: 1em;
+  display: inline;
+}

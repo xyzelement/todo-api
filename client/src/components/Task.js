@@ -3,12 +3,17 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 
 class Task extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   makeStar(task) {
     if (task.star) {
       return (
         <span className="star star-on">
           <a href="/" onClick={this.onClick.bind(this, "star")}>
-            •
+            ★
           </a>
         </span>
       );
@@ -16,7 +21,7 @@ class Task extends React.Component {
       return (
         <span className="star">
           <a href="/" onClick={this.onClick.bind(this, "star")}>
-            •
+            ☆
           </a>
         </span>
       );
@@ -47,7 +52,7 @@ class Task extends React.Component {
     return (
       <span className="star">
         <a href="/" onClick={this.onClick.bind(this, "delete")}>
-          X
+          ✗
         </a>
       </span>
     );
@@ -61,15 +66,39 @@ class Task extends React.Component {
         </span>
       );
     } else {
-      return <span className="action">{task.action}</span>;
+      return (
+        <form onSubmit={this.onEdit.bind(this, "sub")}>
+          <span className="action">
+            <input
+              type="text"
+              ref={input => {
+                this.nameInput = input;
+              }}
+              readOnly={!this.state.editMode}
+              defaultValue={task.action}
+              onChange={this.onChange.bind(this)}
+              onClick={this.onClick.bind(this, "edit")}
+            />
+          </span>
+        </form>
+      );
     }
+  }
+
+  onChange(e) {
+    this.setState({ newAction: e.target.value });
+  }
+
+  onEdit(action, e) {
+    e.preventDefault();
+    this.props.updateTaskAction(this.props.auth.jwtToken, this.props.task._id, {
+      action: this.state.newAction
+    });
+    this.setState({ editMode: false });
   }
 
   onClick(action, e) {
     e.preventDefault();
-
-    var out = {};
-    out[action] = !this.props.task[action];
 
     if (action === "delete") {
       this.props.deleteTaskAction(
@@ -78,6 +107,15 @@ class Task extends React.Component {
       );
       return;
     }
+
+    if (action === "edit") {
+      this.setState({ editMode: true });
+      this.nameInput.focus();
+      return;
+    }
+
+    var out = {};
+    out[action] = !this.props.task[action];
 
     this.props.updateTaskAction(
       this.props.auth.jwtToken,
@@ -89,10 +127,10 @@ class Task extends React.Component {
   render() {
     return (
       <div className="task">
+        {this.makeDelete()}
+        {this.makeCheck(this.props.task)}
         {this.makeStar(this.props.task)}
         {this.makeAction(this.props.task)}
-        {this.makeCheck(this.props.task)}
-        {this.makeDelete()}
       </div>
     );
   }

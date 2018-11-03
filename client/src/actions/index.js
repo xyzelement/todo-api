@@ -105,7 +105,7 @@ export const updateTaskAction = (token, id, update) => {
 export const addTaskAction = (token, update) => {
   return async dispatch => {
     try {
-      console.log("addTaskAction: ", token, update);
+      console.log("addTaskAction: ", update);
 
       const res = await axios.post("http://localhost:5000/users/task", update, {
         headers: { Authorization: "jwt " + token }
@@ -126,8 +126,6 @@ export const addTaskAction = (token, update) => {
 export const deleteTaskAction = (token, id) => {
   return async dispatch => {
     try {
-      console.log("deleteTaskAction: ", token);
-
       const res = await axios.delete("http://localhost:5000/users/task", {
         data: { id },
         headers: { Authorization: "jwt " + token }

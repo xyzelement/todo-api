@@ -2,14 +2,15 @@ body {
   background-color: white;
 }
 
-.star {
+.star a {
+  text-decoration: none;
   width: 25px;
   display: inline-block;
   text-align: center;
   color: gainsboro;
 }
 
-.star-on {
+.star-on a {
   color: black;
 }
 

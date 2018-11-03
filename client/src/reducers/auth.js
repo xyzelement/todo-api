@@ -43,7 +43,7 @@ export default (state = DEFAULT_STATE, action) => {
       var out = { ...state };
       out.tasks = state.tasks.map(item => {
         if (item._id === action.payload.id) {
-          return { ...item, done: action.payload.update.done };
+          return { ...item, ...action.payload.update };
         }
         return item;
       });

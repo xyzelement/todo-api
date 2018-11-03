@@ -5,9 +5,21 @@ import * as actions from "../actions";
 class Task extends React.Component {
   makeStar(task) {
     if (task.star) {
-      return <span className="star star-on">•</span>;
+      return (
+        <span className="star star-on">
+          <a href="/" onClick={this.onClick.bind(this, "star")}>
+            •
+          </a>
+        </span>
+      );
     } else {
-      return <span className="star">•</span>;
+      return (
+        <span className="star">
+          <a href="/" onClick={this.onClick.bind(this, "star")}>
+            •
+          </a>
+        </span>
+      );
     }
   }
 
@@ -15,13 +27,17 @@ class Task extends React.Component {
     if (task.done) {
       return (
         <span className="star star-on">
-          <a onClick={this.onClick.bind(this)}>✓</a>
+          <a href="/" onClick={this.onClick.bind(this, "done")}>
+            ✓
+          </a>
         </span>
       );
     } else {
       return (
         <span className="star">
-          <a onClick={this.onClick.bind(this)}>✓</a>
+          <a href="/" onClick={this.onClick.bind(this, "done")}>
+            ✓
+          </a>
         </span>
       );
     }
@@ -39,11 +55,21 @@ class Task extends React.Component {
     }
   }
 
-  onClick() {
-    console.log("Task: onClick: ", this.props.task._id, this.props.task.done);
-    this.props.updateTaskAction(this.props.task._id, {
-      done: !this.props.task.done
-    });
+  onClick(action, e) {
+    e.preventDefault();
+
+    var out = {};
+    out[action] = !this.props.task[action];
+
+    console.log(
+      "Task: onClick: ",
+      action,
+      this.props.task._id,
+      this.props.task["action"],
+      out
+    );
+
+    this.props.updateTaskAction(this.props.task._id, out);
   }
 
   render() {

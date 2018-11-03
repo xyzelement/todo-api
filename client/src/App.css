@@ -9,7 +9,20 @@ body {
   color: gainsboro;
 }
 
-.star-on {
+.star a {
+  text-decoration: none;
+  color: gainsboro;
+}
+
+.done {
+  color: gainsboro;
+}
+.custom-input-box {
+  border-width: 0px;
+  border-bottom-width: 1px;
+}
+
+.star-on a {
   color: black;
 }
 
@@ -21,4 +34,22 @@ body {
 .task {
   font-family: monospace;
   font-size: 1.6em;
+  line-height: 1.6em;
+}
+
+.action input {
+  width: 80%;
+  border-width: 0px;
+  font-family: monospace;
+  font-size: 1em;
+}
+
+.action input:read-write {
+  border-bottom-width: 2px;
+  font-weight: bold;
+}
+
+form {
+  font-size: 1em;
+  display: inline;
 }

@@ -1,6 +1,6 @@
-import { AUTH_SIGNUP, AUTH_SIGNOUT } from "../actions/types";
+import { AUTH_SIGNUP, AUTH_SIGNOUT, UPDATE_TASKS } from "../actions/types";
 import { AUTH_ERROR } from "../actions/types";
-import { GET_TASKS } from "../actions/types";
+import { GET_TASKS, ADD_TASK, DELETE_TASK } from "../actions/types";
 
 const DEFAULT_STATE = {
   isAuthenticated: false,
@@ -38,6 +38,34 @@ export default (state = DEFAULT_STATE, action) => {
     case GET_TASKS:
       console.log("Auth: AUTH_GET_TASKS");
       return { ...state, tasks: action.payload };
+    case UPDATE_TASKS:
+      console.log("Auth: UPDATE_TASKS", action.payload);
+      var out = { ...state };
+      out.tasks = state.tasks.map(item => {
+        if (item._id === action.payload.id) {
+          return { ...item, ...action.payload.update };
+        }
+        return item;
+      });
+
+      return out;
+
+    case ADD_TASK:
+      console.log("Auth: ADD_TASK", action.payload);
+      var out_state = { ...state };
+      out_state.tasks = [...state.tasks];
+      out_state.tasks.push(action.payload);
+      return out_state;
+
+    case DELETE_TASK:
+      console.log("Auth: DELETE_TASK", action.payload);
+      var out_delete_state = { ...state };
+      out_delete_state.tasks = state.tasks.filter(item => {
+        return item._id !== action.payload.id;
+      });
+
+      return out_delete_state;
+
     default:
       return state; // No change to state from weird actions
   }

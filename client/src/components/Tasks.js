@@ -2,10 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import Task from "./Task";
+import AddTask from "./AddTask";
 
 class Tasks extends React.Component {
   componentWillMount() {
-    console.log("Tasks:componentWillMount", this.props.auth.jwtToken.length);
     this.props.getTasksAction(this.props.auth.jwtToken);
   }
 
@@ -15,7 +15,13 @@ class Tasks extends React.Component {
   }
 
   render() {
-    return <div className="container">{this.renderTasks()}</div>;
+    return (
+      <div className="container">
+        <AddTask />
+        <br />
+        {this.renderTasks()}
+      </div>
+    );
   }
 }
 

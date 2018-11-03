@@ -27,9 +27,10 @@
   },
   "devDependencies": {},
   "scripts": {
+    "mongod": "C:\\Users\\Fred\\Desktop\\mongodb-win32-x86_64-2008plus-ssl-4.0.3\\bin\\mongod.exe",
     "server-dev": "nodemon --no-deprecation server/app.js",
     "client-dev": "npm start --prefix client",
-    "start-dev": "concurrently \"npm run server-dev\" \"npm run client-dev\"",
+    "start-dev": "concurrently \"npm run mongod\" \"npm run server-dev\" \"npm run client-dev\"",
     "test": "nyc mocha -t 2500 --no-deprecation --exit server/test"
   },
   "repository": {

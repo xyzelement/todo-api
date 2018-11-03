@@ -38,9 +38,7 @@ export const signUpAction = formData => {
 
 export const signOutAction = () => {
   return dispatch => {
-    console.log("signOutAction: about to remove TOKEN from local storage");
     localStorage.removeItem("JWT_TOKEN");
-    console.log("signOutAction: about to dispatch AUTH_SIGNOUT");
     dispatch({ type: AUTH_SIGNOUT });
   };
 };
@@ -54,10 +52,8 @@ export const signInAction = formData => {
         formData
       );
 
-      console.log("signInAction: about to set TOKEN to local storate");
       localStorage.setItem("JWT_TOKEN", res.data.token);
 
-      console.log("signInAction: about to dispatch: AUTH_SIGNUP");
       dispatch({ type: AUTH_SIGNUP, payload: res.data.token });
     } catch (error) {
       console.log(error);
@@ -72,11 +68,9 @@ export const signInAction = formData => {
 export const getTasksAction = token => {
   return async dispatch => {
     try {
-      console.log("getTasksAction: TOKEN" + token.length);
       const res = await axios.get("http://localhost:5000/users/tasks", {
         headers: { Authorization: "jwt " + token }
       });
-      console.log("getTasksAction: about to dispatch GET_TASKS");
       dispatch({ type: GET_TASKS, payload: res.data.tasks });
     } catch (error) {
       console.log("getTasksAction error", error, token);
@@ -89,12 +83,10 @@ export const updateTaskAction = (token, id, update) => {
     try {
       const req = { ...update, id };
 
-      console.log("updateTaskAction: ", token, req);
-
-      const res = await axios.put("http://localhost:5000/users/task", req, {
+      //TODO - check response const res =
+      await axios.put("http://localhost:5000/users/task", req, {
         headers: { Authorization: "jwt " + token }
       });
-      console.log("updateTaskAction: ", req, res);
       dispatch({ type: UPDATE_TASKS, payload: { id, update } });
     } catch (error) {
       console.log("updateTaskAction error", error, token, id, update);
@@ -105,12 +97,9 @@ export const updateTaskAction = (token, id, update) => {
 export const addTaskAction = (token, update) => {
   return async dispatch => {
     try {
-      console.log("addTaskAction: ", update);
-
       const res = await axios.post("http://localhost:5000/users/task", update, {
         headers: { Authorization: "jwt " + token }
       });
-      console.log("addTaskAction: response", res);
 
       if (res.data.saved) {
         dispatch({ type: ADD_TASK, payload: res.data.saved });
@@ -126,11 +115,11 @@ export const addTaskAction = (token, update) => {
 export const deleteTaskAction = (token, id) => {
   return async dispatch => {
     try {
-      const res = await axios.delete("http://localhost:5000/users/task", {
+      //TODO - check response const res =
+      await axios.delete("http://localhost:5000/users/task", {
         data: { id },
         headers: { Authorization: "jwt " + token }
       });
-      console.log("deleteTaskAction: ", res);
       dispatch({ type: DELETE_TASK, payload: { id } });
     } catch (error) {
       console.log("deleteTaskAction error", error, token, id);

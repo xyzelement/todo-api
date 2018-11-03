@@ -6,7 +6,6 @@ import AddTask from "./AddTask";
 
 class Tasks extends React.Component {
   componentWillMount() {
-    console.log("Tasks:componentWillMount", this.props.auth.jwtToken.length);
     this.props.getTasksAction(this.props.auth.jwtToken);
   }
 

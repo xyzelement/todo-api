@@ -71,8 +71,6 @@ class Task extends React.Component {
     var out = {};
     out[action] = !this.props.task[action];
 
-    console.log("Task: onClick: ", action, this.props.task._id);
-
     if (action === "delete") {
       this.props.deleteTaskAction(
         this.props.auth.jwtToken,

@@ -16,7 +16,6 @@ class AddTask extends Component {
     //Signup in this case is the action creator
     //await this.props.signUpAction(formData);
     const { reset } = this.props;
-    console.log("AddTask: onSubmit", formData);
     await this.props.addTaskAction(this.props.auth.jwtToken, formData);
     reset();
   }

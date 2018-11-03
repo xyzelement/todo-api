@@ -25,8 +25,6 @@ const initialState = {
   }
 };
 
-console.log("INITIAL STATE: ", initialState);
-
 ReactDOM.render(
   <Provider
     store={createStore(reducers, initialState, applyMiddleware(reduxThunk))}

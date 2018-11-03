@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import * as actions from "../actions";
 
-export default class Task extends React.Component {
+class Task extends React.Component {
   makeStar(task) {
     if (task.star) {
       return <span className="star star-on">•</span>;
@@ -11,9 +13,17 @@ export default class Task extends React.Component {
 
   makeCheck(task) {
     if (task.done) {
-      return <span className="star star-on">✓</span>;
+      return (
+        <span className="star star-on">
+          <a onClick={this.onClick.bind(this)}>✓</a>
+        </span>
+      );
     } else {
-      return <span className="star">✓</span>;
+      return (
+        <span className="star">
+          <a onClick={this.onClick.bind(this)}>✓</a>
+        </span>
+      );
     }
   }
 
@@ -29,6 +39,13 @@ export default class Task extends React.Component {
     }
   }
 
+  onClick() {
+    console.log("Task: onClick: ", this.props.task._id, this.props.task.done);
+    this.props.updateTaskAction(this.props.task._id, {
+      done: !this.props.task.done
+    });
+  }
+
   render() {
     return (
       <div className="task">
@@ -39,3 +56,8 @@ export default class Task extends React.Component {
     );
   }
 }
+
+export default connect(
+  null, //mapStateToProps,
+  actions
+)(Task);

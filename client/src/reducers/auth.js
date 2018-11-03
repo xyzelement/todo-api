@@ -1,4 +1,4 @@
-import { AUTH_SIGNUP, AUTH_SIGNOUT } from "../actions/types";
+import { AUTH_SIGNUP, AUTH_SIGNOUT, UPDATE_TASKS } from "../actions/types";
 import { AUTH_ERROR } from "../actions/types";
 import { GET_TASKS } from "../actions/types";
 
@@ -38,6 +38,18 @@ export default (state = DEFAULT_STATE, action) => {
     case GET_TASKS:
       console.log("Auth: AUTH_GET_TASKS");
       return { ...state, tasks: action.payload };
+    case UPDATE_TASKS:
+      console.log("Auth: UPDATE_TASKS", action.payload);
+      var out = { ...state };
+      out.tasks = state.tasks.map(item => {
+        if (item._id === action.payload.id) {
+          return { ...item, done: action.payload.update.done };
+        }
+        return item;
+      });
+
+      return out;
+
     default:
       return state; // No change to state from weird actions
   }

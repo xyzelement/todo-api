@@ -3,6 +3,7 @@ import { AUTH_SIGNUP } from "./types";
 import { AUTH_ERROR } from "./types";
 import { GET_TASKS } from "./types";
 import { AUTH_SIGNOUT } from "./types";
+import { UPDATE_TASKS } from "./types";
 /*
     Redux handles all this:
     ActionCreatrs => create/return Actions -> dispatched -> Middlewares -> reducers
@@ -80,5 +81,12 @@ export const getTasksAction = token => {
     } catch (error) {
       console.log("getTasksAction error", error, token);
     }
+  };
+};
+
+export const updateTaskAction = (id, update) => {
+  return async dispatch => {
+    console.log("updateTaskAction: ", id, update);
+    dispatch({ type: UPDATE_TASKS, payload: { id, update } });
   };
 };

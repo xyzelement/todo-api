@@ -3,7 +3,7 @@ import { AUTH_SIGNUP } from "./types";
 import { AUTH_ERROR } from "./types";
 import { GET_TASKS } from "./types";
 import { AUTH_SIGNOUT } from "./types";
-import { UPDATE_TASKS, ADD_TASK } from "./types";
+import { UPDATE_TASKS, ADD_TASK, DELETE_TASK } from "./types";
 /*
     Redux handles all this:
     ActionCreatrs => create/return Actions -> dispatched -> Middlewares -> reducers
@@ -119,6 +119,23 @@ export const addTaskAction = (token, update) => {
       }
     } catch (error) {
       console.log("addTaskAction error", error, token, update);
+    }
+  };
+};
+
+export const deleteTaskAction = (token, id) => {
+  return async dispatch => {
+    try {
+      console.log("deleteTaskAction: ", token);
+
+      const res = await axios.delete("http://localhost:5000/users/task", {
+        data: { id },
+        headers: { Authorization: "jwt " + token }
+      });
+      console.log("deleteTaskAction: ", res);
+      dispatch({ type: DELETE_TASK, payload: { id } });
+    } catch (error) {
+      console.log("deleteTaskAction error", error, token, id);
     }
   };
 };

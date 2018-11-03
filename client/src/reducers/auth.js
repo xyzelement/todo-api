@@ -1,6 +1,6 @@
 import { AUTH_SIGNUP, AUTH_SIGNOUT, UPDATE_TASKS } from "../actions/types";
 import { AUTH_ERROR } from "../actions/types";
-import { GET_TASKS, ADD_TASK } from "../actions/types";
+import { GET_TASKS, ADD_TASK, DELETE_TASK } from "../actions/types";
 
 const DEFAULT_STATE = {
   isAuthenticated: false,
@@ -56,6 +56,16 @@ export default (state = DEFAULT_STATE, action) => {
       out_state.tasks = [...state.tasks];
       out_state.tasks.push(action.payload);
       return out_state;
+
+    case DELETE_TASK:
+      console.log("Auth: DELETE_TASK", action.payload);
+      var out_delete_state = { ...state };
+      out_delete_state.tasks = state.tasks.filter(item => {
+        return item._id !== action.payload.id;
+      });
+
+      return out_delete_state;
+
     default:
       return state; // No change to state from weird actions
   }

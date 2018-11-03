@@ -43,6 +43,16 @@ class Task extends React.Component {
     }
   }
 
+  makeDelete() {
+    return (
+      <span className="star">
+        <a href="/" onClick={this.onClick.bind(this, "delete")}>
+          X
+        </a>
+      </span>
+    );
+  }
+
   makeAction(task) {
     if (task.done) {
       return (
@@ -61,13 +71,15 @@ class Task extends React.Component {
     var out = {};
     out[action] = !this.props.task[action];
 
-    console.log(
-      "Task: onClick: ",
-      action,
-      this.props.task._id,
-      this.props.task["action"],
-      out
-    );
+    console.log("Task: onClick: ", action, this.props.task._id);
+
+    if (action === "delete") {
+      this.props.deleteTaskAction(
+        this.props.auth.jwtToken,
+        this.props.task._id
+      );
+      return;
+    }
 
     this.props.updateTaskAction(
       this.props.auth.jwtToken,
@@ -82,6 +94,7 @@ class Task extends React.Component {
         {this.makeStar(this.props.task)}
         {this.makeAction(this.props.task)}
         {this.makeCheck(this.props.task)}
+        {this.makeDelete()}
       </div>
     );
   }

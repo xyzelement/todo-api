@@ -69,7 +69,11 @@ class Task extends React.Component {
       out
     );
 
-    this.props.updateTaskAction(this.props.task._id, out);
+    this.props.updateTaskAction(
+      this.props.auth.jwtToken,
+      this.props.task._id,
+      out
+    );
   }
 
   render() {
@@ -83,7 +87,13 @@ class Task extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  };
+};
+
 export default connect(
-  null, //mapStateToProps,
+  mapStateToProps,
   actions
 )(Task);

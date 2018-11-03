@@ -77,13 +77,13 @@ module.exports = {
     const _id = req.value.body.id;
 
     const update = {};
-    if (req.value.body.action) {
+    if (req.value.body.action !== undefined) {
       update.action = req.value.body.action;
     }
-    if (req.value.body.star) {
+    if (req.value.body.star !== undefined) {
       update.star = req.value.body.star;
     }
-    if (req.value.body.done) {
+    if (req.value.body.done !== undefined) {
       update.done = req.value.body.done;
     }
 

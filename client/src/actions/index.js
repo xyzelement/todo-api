@@ -84,9 +84,20 @@ export const getTasksAction = token => {
   };
 };
 
-export const updateTaskAction = (id, update) => {
+export const updateTaskAction = (token, id, update) => {
   return async dispatch => {
-    console.log("updateTaskAction: ", id, update);
-    dispatch({ type: UPDATE_TASKS, payload: { id, update } });
+    try {
+      const req = { ...update, id };
+
+      console.log("updateTaskAction: ", token, req);
+
+      const res = await axios.put("http://localhost:5000/users/task", req, {
+        headers: { Authorization: "jwt " + token }
+      });
+      console.log("updateTaskAction: ", req, res);
+      dispatch({ type: UPDATE_TASKS, payload: { id, update } });
+    } catch (error) {
+      console.log("updateTaskAction error", error, token, id, update);
+    }
   };
 };

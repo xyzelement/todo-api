@@ -11,8 +11,8 @@ import App from "./components/App";
 import Home from "./components/Home";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
+import SignOut from "./components/SignOut";
 import Tasks from "./components/Tasks";
-
 import reducers from "./reducers";
 
 //TODO: is this the right place?
@@ -25,29 +25,9 @@ const initialState = {
   }
 };
 
-ReactDOM.render(
-  // This is our router component, it's asking the App
-  // component to set its content to the Home component.
-  // The component part will be passed into App as props
-  //
-  // TODO: understand the connection between BrowserRouter
-  // and Route - and how these Routes make sense inside
-  // the App tag
-  //
-  // Alright, so the "store" is where redux keeps all our
-  // data. And provider somehow magically makes this
-  // state available to all container components in the
-  // app.
-  //
-  // ReduxThunk is middleware for handling asynch stuff.
-  // Basically normally actions need to be processed
-  // synchronously. Thunk solves that: lets you call action
-  // creators that return a function instead of an action
-  // object. That function receives the store’s dispatch
-  // method, which is then used to dispatch regular
-  // synchronous actions inside the body of the function
-  // once the asynchronous operations have completed.
+console.log("INITIAL STATE: ", initialState);
 
+ReactDOM.render(
   <Provider
     store={createStore(reducers, initialState, applyMiddleware(reduxThunk))}
   >
@@ -57,6 +37,7 @@ ReactDOM.render(
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/tasks" component={Tasks} />
+        <Route exact path="/signout" component={SignOut} />
       </App>
     </BrowserRouter>
   </Provider>,

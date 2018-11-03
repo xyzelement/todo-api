@@ -21,7 +21,16 @@ class SignIn extends Component {
   }
 
   helper() {
-    if (this.props.isAuthenticated) {
+    console.log(
+      "SignIn: helper: isAuthenticated: ",
+      this.props.auth.isAuthenticated
+    );
+    if (this.props.auth.isAuthenticated) {
+      console.log(
+        "SignIn: helper: has token?: ",
+        this.props.auth.jwtToken.length
+      );
+
       return <Redirect to="/tasks" />;
     }
   }
@@ -61,7 +70,7 @@ class SignIn extends Component {
 }
 
 function mapStateToProps(state) {
-  return { isAuthenticated: state.auth.isAuthenticated };
+  return { auth: state.auth };
 }
 
 export default compose(

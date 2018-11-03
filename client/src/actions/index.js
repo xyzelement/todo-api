@@ -2,6 +2,7 @@ import axios from "axios";
 import { AUTH_SIGNUP } from "./types";
 import { AUTH_ERROR } from "./types";
 import { GET_TASKS } from "./types";
+import { AUTH_SIGNOUT } from "./types";
 /*
     Redux handles all this:
     ActionCreatrs => create/return Actions -> dispatched -> Middlewares -> reducers
@@ -34,6 +35,15 @@ export const signUpAction = formData => {
   };
 };
 
+export const signOutAction = () => {
+  return dispatch => {
+    console.log("signOutAction: about to dispatch AUTH_SIGNOUT");
+    dispatch({ type: AUTH_SIGNOUT });
+    console.log("signOutAction: about to remove TOKEN from local storage");
+    localStorage.removeItem("JWT_TOKEN");
+  };
+};
+
 export const signInAction = formData => {
   return async dispatch => {
     try {
@@ -43,8 +53,11 @@ export const signInAction = formData => {
         formData
       );
 
-      dispatch({ type: AUTH_SIGNUP, payload: res.data.token });
+      console.log("signInAction: about to set TOKEN to local storate");
       localStorage.setItem("JWT_TOKEN", res.data.token);
+
+      console.log("signInAction: about to dispatch: AUTH_SIGNUP");
+      dispatch({ type: AUTH_SIGNUP, payload: res.data.token });
     } catch (error) {
       console.log(error);
       dispatch({
@@ -58,12 +71,21 @@ export const signInAction = formData => {
 export const getTasksAction = formData => {
   return async dispatch => {
     try {
+      console.log(
+        "getTasksAction: TOKEN from local" +
+          localStorage.getItem("JWT_TOKEN").length
+      );
       const res = await axios.get("http://localhost:5000/users/tasks", {
         headers: { Authorization: "jwt " + localStorage.getItem("JWT_TOKEN") }
       });
+      console.log("getTasksAction: about to dispatch GET_TASKS");
       dispatch({ type: GET_TASKS, payload: res.data.tasks });
     } catch (error) {
-      console.log("error here", error);
+      console.log(
+        "getTasksAction error",
+        error,
+        localStorage.getItem("JWT_TOKEN")
+      );
     }
   };
 };

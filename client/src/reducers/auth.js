@@ -1,4 +1,4 @@
-import { AUTH_SIGNUP } from "../actions/types";
+import { AUTH_SIGNUP, AUTH_SIGNOUT } from "../actions/types";
 import { AUTH_ERROR } from "../actions/types";
 import { GET_TASKS } from "../actions/types";
 
@@ -13,7 +13,7 @@ const DEFAULT_STATE = {
 export default (state = DEFAULT_STATE, action) => {
   switch (action.type) {
     case AUTH_SIGNUP:
-      // process it
+      console.log("Auth: AUTH_SIGNUP");
       return {
         ...state,
         jwtToken: action.payload,
@@ -21,13 +21,22 @@ export default (state = DEFAULT_STATE, action) => {
         errorMsg: ""
       };
     case AUTH_ERROR:
+      console.log("Auth: AUTH_ERROR");
       return {
         ...state,
         jwtToken: "",
         isAuthenticated: false,
         errorMsg: action.payload
       };
+    case AUTH_SIGNOUT:
+      console.log("Auth: AUTH_SIGNOUT");
+      return {
+        ...state,
+        jwtToken: "",
+        isAuthenticated: false
+      };
     case GET_TASKS:
+      console.log("Auth: AUTH_GET_TASKS");
       return { ...state, tasks: action.payload };
     default:
       return state; // No change to state from weird actions

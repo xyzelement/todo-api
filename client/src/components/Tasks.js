@@ -4,13 +4,14 @@ import * as actions from "../actions";
 import Task from "./Task";
 
 class Tasks extends React.Component {
-  constructor(props) {
-    super(props);
-    //  this.onSubmit = this.onSubmit.bind(this);
-  }
+  //constructor(props) {
+  //super(props);
+  //  this.onSubmit = this.onSubmit.bind(this);
+  //}
 
   componentWillMount() {
     //TODO: I suspect this is the worst place to be calling this form
+    console.log("Tasks:componentWillMount", this.props.auth.jwtToken.length);
     this.props.getTasksAction();
   }
 
@@ -26,7 +27,7 @@ class Tasks extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    constant: "some things never change",
+    auth: state.auth,
     tasks: state.auth.tasks
   };
 };

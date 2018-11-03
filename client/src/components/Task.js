@@ -9,11 +9,17 @@ class Task extends React.Component {
   }
 
   makeStar(task) {
+    const character = task.star ? "★" : "☆";
+
+    if (task.done) {
+      return <span className="star">{character}</span>;
+    }
+
     if (task.star) {
       return (
         <span className="star star-on">
           <a href="/" onClick={this.onClick.bind(this, "star")}>
-            ★
+            {character}
           </a>
         </span>
       );
@@ -21,7 +27,7 @@ class Task extends React.Component {
       return (
         <span className="star">
           <a href="/" onClick={this.onClick.bind(this, "star")}>
-            ☆
+            {character}
           </a>
         </span>
       );
@@ -60,11 +66,7 @@ class Task extends React.Component {
 
   makeAction(task) {
     if (task.done) {
-      return (
-        <span className="action">
-          <del>{task.action}</del>
-        </span>
-      );
+      return <span className="action done">{task.action}</span>;
     } else {
       return (
         <form onSubmit={this.onEdit.bind(this, "sub")}>

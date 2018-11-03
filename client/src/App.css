@@ -2,14 +2,21 @@ body {
   background-color: white;
 }
 
-.star a {
-  text-decoration: none;
+.star {
   width: 25px;
   display: inline-block;
   text-align: center;
   color: gainsboro;
 }
 
+.star a {
+  text-decoration: none;
+  color: gainsboro;
+}
+
+.done {
+  color: gainsboro;
+}
 .custom-input-box {
   border-width: 0px;
   border-bottom-width: 1px;
@@ -27,6 +34,7 @@ body {
 .task {
   font-family: monospace;
   font-size: 1.6em;
+  line-height: 1.6em;
 }
 
 .action input {

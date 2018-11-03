@@ -71,7 +71,20 @@ export const getTasksAction = token => {
       const res = await axios.get("http://localhost:5000/users/tasks", {
         headers: { Authorization: "jwt " + token }
       });
-      dispatch({ type: GET_TASKS, payload: res.data.tasks });
+      dispatch({
+        type: GET_TASKS,
+        payload: res.data.tasks.sort((a, b) => {
+          if (a.done === b.done) {
+            if (a.star === b.star) {
+              return 0;
+            } else {
+              return b.star;
+            }
+          } else {
+            return a.done;
+          }
+        })
+      });
     } catch (error) {
       console.log("getTasksAction error", error, token);
     }

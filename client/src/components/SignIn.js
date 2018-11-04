@@ -72,4 +72,6 @@ export default compose(
   reduxForm({ form: "signin" })
 )(SignIn);
 
+export const testComponent = SignIn;
+
 //export default reduxForm({ form: "signup" })(SignUp);

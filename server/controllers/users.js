@@ -59,7 +59,8 @@ module.exports = {
     const action = req.value.body.action;
     const star = req.value.body.star;
     const done = req.value.body.done;
-    const newTask = new Task({ email, action, star, done });
+    const context = req.value.body.context;
+    const newTask = new Task({ email, action, star, done, context });
     await newTask.save();
     res.json({ saved: newTask });
   },

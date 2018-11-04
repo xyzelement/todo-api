@@ -27,7 +27,10 @@ module.exports = {
     taskAddSchema: Joi.object().keys({
       action: Joi.string().required(),
       star: Joi.bool(),
-      done: Joi.bool()
+      done: Joi.bool(),
+      context: Joi.array()
+        .items(Joi.string())
+        .required()
     }),
     taskDeleteSchema: Joi.object().keys({
       id: Joi.objectId().required()

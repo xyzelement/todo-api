@@ -16,11 +16,14 @@ class AddTask extends Component {
     //Signup in this case is the action creator
     //await this.props.signUpAction(formData);
     const { reset } = this.props;
+    formData.context = [this.props.context];
     await this.props.addTaskAction(this.props.auth.jwtToken, formData);
     reset();
   }
   render() {
     const { handleSubmit } = this.props;
+    console.log(this.props.context, this.props.auth);
+
     return (
       <div>
         <form onSubmit={handleSubmit(this.onSubmit)}>

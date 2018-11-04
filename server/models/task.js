@@ -7,7 +7,8 @@ const taskSchema = new Schema({
   email: { type: String, required: true, lowercase: true },
   action: { type: String, required: true },
   star: { type: Boolean, required: true, default: false },
-  done: { type: Boolean, required: true, default: false }
+  done: { type: Boolean, required: true, default: false },
+  context: [{ type: String, required: true }]
 });
 
 const Task = mongoose.model("task", taskSchema);

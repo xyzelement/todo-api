@@ -1,5 +1,6 @@
 body {
   background-color: white;
+  font-family: monospace;
 }
 
 .star {
@@ -32,7 +33,6 @@ body {
 }
 
 .task {
-  font-family: monospace;
   font-size: 1.6em;
   line-height: 1.6em;
 }
@@ -40,7 +40,7 @@ body {
 .action input {
   width: 80%;
   border-width: 0px;
-  font-family: monospace;
+
   font-size: 1em;
 }
 
@@ -50,6 +50,11 @@ body {
 }
 
 form {
-  font-size: 1em;
+  font-size: 0.7em;
   display: inline;
+}
+
+.context a {
+  text-decoration: none;
+  color: gainsboro;
 }

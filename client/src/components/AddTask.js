@@ -22,7 +22,6 @@ class AddTask extends Component {
   }
   render() {
     const { handleSubmit } = this.props;
-    console.log(this.props.context, this.props.auth);
 
     return (
       <div>

@@ -21,14 +21,10 @@ class Tasks extends React.Component {
 
   renderContexts() {
     return (
-      <div>
+      <div className="context">
         {this.props.contexts.map(context => {
           if (context === this.state.currentContext) {
-            return (
-              <span key={context}>
-                <b>{context}</b>
-              </span>
-            );
+            return <span key={context}>{context} </span>;
           } else {
             return (
               <a
@@ -41,6 +37,10 @@ class Tasks extends React.Component {
             );
           }
         })}
+
+        <a style={{ float: "right" }} href="/signout">
+          Sign Out
+        </a>
       </div>
     );
   }
@@ -56,7 +56,7 @@ class Tasks extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
         {this.renderContexts()}
         <AddTask context={this.state.currentContext} />
         <br />

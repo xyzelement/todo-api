@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { compose } from "redux";
 
 class Header extends Component {
   headerHelper(props) {
@@ -39,9 +38,7 @@ const mapStateToProps = state => {
   return { auth: state.auth };
 };
 
-export default compose(
-  connect(
-    mapStateToProps,
-    null
-  )(Header)
-);
+export default connect(
+  mapStateToProps,
+  null
+)(Header);

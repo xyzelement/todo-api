@@ -4,11 +4,8 @@ import { AUTH_ERROR } from "./types";
 import { GET_TASKS } from "./types";
 import { AUTH_SIGNOUT } from "./types";
 import { UPDATE_TASKS, ADD_TASK, DELETE_TASK } from "./types";
-/*
-    Redux handles all this:
-    ActionCreatrs => create/return Actions -> dispatched -> Middlewares -> reducers
-    The actions can have access to dispatchers?
-*/
+
+const HOST = "http://" + window.location.hostname + ":5000";
 
 export const signUpAction = formData => {
   return async dispatch => {
@@ -20,17 +17,14 @@ export const signUpAction = formData => {
     */
     try {
       // formData has the right fields because of how form fields are named
-      const res = await axios.post(
-        "http://localhost:5000/users/signup",
-        formData
-      );
+      const res = await axios.post(HOST + "/users/signup", formData);
 
       localStorage.setItem("JWT_TOKEN", res.data.token);
       dispatch({ type: AUTH_SIGNUP, payload: res.data.token });
     } catch (error) {
       dispatch({
         type: AUTH_ERROR,
-        payload: "Email is bad?!"
+        payload: error
       });
     }
   };
@@ -47,10 +41,7 @@ export const signInAction = formData => {
   return async dispatch => {
     try {
       // formData has the right fields because of how form fields are named
-      const res = await axios.post(
-        "http://localhost:5000/users/signin",
-        formData
-      );
+      const res = await axios.post(HOST + "/users/signin", formData);
 
       localStorage.setItem("JWT_TOKEN", res.data.token);
 
@@ -59,7 +50,7 @@ export const signInAction = formData => {
       console.log(error);
       dispatch({
         type: AUTH_ERROR,
-        payload: "Email is bad?!"
+        payload: error
       });
     }
   };
@@ -68,7 +59,7 @@ export const signInAction = formData => {
 export const getTasksAction = token => {
   return async dispatch => {
     try {
-      const res = await axios.get("http://localhost:5000/users/tasks", {
+      const res = await axios.get(HOST + "/users/tasks", {
         headers: { Authorization: "jwt " + token }
       });
       dispatch({
@@ -97,7 +88,7 @@ export const updateTaskAction = (token, id, update) => {
       const req = { ...update, id };
 
       //TODO - check response const res =
-      await axios.put("http://localhost:5000/users/task", req, {
+      await axios.put(HOST + "/users/task", req, {
         headers: { Authorization: "jwt " + token }
       });
       dispatch({ type: UPDATE_TASKS, payload: { id, update } });
@@ -110,7 +101,7 @@ export const updateTaskAction = (token, id, update) => {
 export const addTaskAction = (token, update) => {
   return async dispatch => {
     try {
-      const res = await axios.post("http://localhost:5000/users/task", update, {
+      const res = await axios.post(HOST + "/users/task", update, {
         headers: { Authorization: "jwt " + token }
       });
 
@@ -129,7 +120,7 @@ export const deleteTaskAction = (token, id) => {
   return async dispatch => {
     try {
       //TODO - check response const res =
-      await axios.delete("http://localhost:5000/users/task", {
+      await axios.delete(HOST + "/users/task", {
         data: { id },
         headers: { Authorization: "jwt " + token }
       });

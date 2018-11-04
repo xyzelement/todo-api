@@ -1,6 +1,12 @@
-import { AUTH_SIGNUP, AUTH_SIGNOUT, UPDATE_TASKS } from "../actions/types";
-import { AUTH_ERROR } from "../actions/types";
-import { GET_TASKS, ADD_TASK, DELETE_TASK } from "../actions/types";
+import {
+  AUTH_ERROR,
+  AUTH_SIGNUP,
+  AUTH_SIGNOUT,
+  UPDATE_TASKS,
+  GET_TASKS,
+  ADD_TASK,
+  DELETE_TASK
+} from "../actions/types";
 
 const DEFAULT_STATE = {
   isAuthenticated: false,

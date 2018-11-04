@@ -9,7 +9,7 @@ describe("routeHelpers: testing this middleware", function() {
   // Will use Node's assert. One assertion per test ideally
 
   it("validateBody (taskAddSchema) should add value.body to the req parameter", function() {
-    const req = { body: { action: "Parse this properly!" } };
+    const req = { body: { action: "Parse this properly!", context: ["Test"] } };
     const func = routeHelpers.validateBody(routeHelpers.schemas.taskAddSchema);
     func(req, null, () => {});
 

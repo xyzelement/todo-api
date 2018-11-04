@@ -21,7 +21,7 @@ describe("AUTHORIZED REQUESTS", function() {
     request(app)
       .post("/users/task")
       .set("Authorization", "jwt " + token)
-      .send({ action: "task for all other stuff" })
+      .send({ action: "task for all other stuff", context: ["Test"] })
       .expect(200)
       .then(res => {
         task_id = res.body.saved._id;
@@ -43,7 +43,7 @@ describe("AUTHORIZED REQUESTS", function() {
     return request(app)
       .post("/users/task")
       .set("Authorization", "jwt " + token)
-      .send({ action: "Adding this task" })
+      .send({ action: "Adding this task", context: ["Test"] })
       .expect(200)
       .then(res => {
         assert.strictEqual(res.body.saved.action, "Adding this task");

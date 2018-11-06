@@ -28,9 +28,7 @@ module.exports = {
       action: Joi.string().required(),
       star: Joi.bool(),
       done: Joi.bool(),
-      context: Joi.array()
-        .items(Joi.string())
-        .required(),
+      context: Joi.array().items(Joi.string()),
       status: Joi.string()
     }),
     taskDeleteSchema: Joi.object().keys({

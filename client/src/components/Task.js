@@ -98,7 +98,6 @@ export default class Task extends React.Component {
   }
 
   toggleContext(arr, context) {
-    console.log(arr, context);
     var i = arr.indexOf(context);
     if (i === -1) {
       arr.push(context);
@@ -106,7 +105,6 @@ export default class Task extends React.Component {
       arr.splice(i, 1);
     }
 
-    console.log(arr);
     return arr;
   }
 
@@ -122,6 +120,11 @@ export default class Task extends React.Component {
     e.preventDefault();
 
     if (status === this.props.task.status) {
+      return;
+    }
+
+    //Don't ask tasks w/o context to leave inbox
+    if (status === "action" && this.props.task.context.length === 0) {
       return;
     }
 
@@ -188,14 +191,13 @@ export default class Task extends React.Component {
         </span>
       );
     });
-
-    return this.props.task.status;
   }
 
   makeEditMode() {
     return (
       <span>
-        {this.makeContextSelector()} {this.makeStatusSelector()}
+        {this.makeStatusSelector()}
+        {this.makeContextSelector()}
       </span>
     );
   }

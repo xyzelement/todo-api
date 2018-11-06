@@ -5,7 +5,8 @@ import { GET_TASKS } from "./types";
 import { AUTH_SIGNOUT } from "./types";
 import { UPDATE_TASKS, ADD_TASK, DELETE_TASK } from "./types";
 
-const HOST = "http://" + window.location.hostname + ":5000";
+//const HOST = "http://" + window.location.hostname + ":5000";
+const HOST = "http://" + window.location.hostname;
 
 export const signUpAction = formData => {
   return async dispatch => {

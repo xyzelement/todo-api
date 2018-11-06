@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import { reduxForm, Field } from "redux-form";
+import { Field } from "redux-form";
 
 import { Redirect } from "react-router-dom";
 
-import { connect } from "react-redux";
-import { compose } from "redux";
 import CustomInput from "./CustomInput";
-import * as actions from "../actions";
+
 // This component represents the signup page
-class SignIn extends Component {
+export default class SignIn extends Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
@@ -59,19 +57,3 @@ class SignIn extends Component {
     );
   }
 }
-
-function mapStateToProps(state) {
-  return { auth: state.auth };
-}
-
-export default compose(
-  connect(
-    mapStateToProps,
-    actions
-  ),
-  reduxForm({ form: "signin" })
-)(SignIn);
-
-export const testComponent = SignIn;
-
-//export default reduxForm({ form: "signup" })(SignUp);

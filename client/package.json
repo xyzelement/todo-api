@@ -36,6 +36,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "babel-jest": "^23.6.0"
+    "babel-jest": "^23.6.0",
+    "enzyme-redux": "^0.2.1"
   }
 }

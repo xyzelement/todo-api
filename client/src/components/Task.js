@@ -198,6 +198,7 @@ export default class Task extends React.Component {
       <span>
         {this.makeStatusSelector()}
         {this.makeContextSelector()}
+        {this.makeDelete()}
       </span>
     );
   }
@@ -206,7 +207,6 @@ export default class Task extends React.Component {
     return (
       <div className="task">
         {this.props.mode === "edit" ? this.makeEditMode() : ""}
-        {this.makeDelete()}
         {this.makeCheck(this.props.task)}
         {this.makeStar(this.props.task)}
         {this.makeAction(this.props.task)}

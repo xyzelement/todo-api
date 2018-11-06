@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 mongoose.connect(
-  "mongodb://localhost/TODO",
+  process.env.MONGO_URI || "mongodb://localhost/TODO",
   { useNewUrlParser: true }
 );
 

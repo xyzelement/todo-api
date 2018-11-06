@@ -54,3 +54,6 @@ On the REACT Branch:
   - gives us connect is basically I guess a way to hook up state to react props
 - redux-form helps manage form state using redux
 - redux-thunk lets us dispatch asynchronous redux actions.
+
+HEROKU LOGIC IS HERE
+https://daveceddia.com/deploy-react-express-app-heroku/

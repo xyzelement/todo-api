@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Field } from "redux-form";
-
+import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 
 import CustomInput from "./CustomInput";
@@ -53,6 +53,7 @@ export default class SignIn extends Component {
           </fieldset>
           <button type="submit">Sign In</button>
         </form>
+        <Link to="/signup">Sign Up</Link>
       </div>
     );
   }

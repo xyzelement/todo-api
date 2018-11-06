@@ -5,7 +5,8 @@ import * as actions from "../actions";
 const mapStateToProps = state => {
   return {
     auth: state.auth,
-    contexts: ["Work", "Home", "Phone"] //TODO: make this real!
+    contexts: ["Work", "Home", "Phone"], //TODO: make this real!
+    statuses: ["inbox", "action"] //TODO: make this real!
   };
 };
 

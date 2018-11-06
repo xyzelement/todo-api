@@ -118,6 +118,18 @@ export default class Task extends React.Component {
     });
   }
 
+  onStatusClick(status, e) {
+    e.preventDefault();
+
+    if (status === this.props.task.status) {
+      return;
+    }
+
+    this.props.updateTaskAction(this.props.auth.jwtToken, this.props.task._id, {
+      status
+    });
+  }
+
   onClick(action, e) {
     e.preventDefault();
 
@@ -145,20 +157,12 @@ export default class Task extends React.Component {
     );
   }
 
-  makeEditMode() {
+  makeContextSelector() {
     return this.props.contexts.map(con => {
       const current = this.props.task.context.includes(con);
-      if (current)
-        return (
-          <span className="context-selected" key={con}>
-            <a href="/" onClick={this.onContextClick.bind(this, con)}>
-              {con}
-            </a>
-            &nbsp;
-          </span>
-        );
+
       return (
-        <span className="done" key={con}>
+        <span className={current ? "context-selected" : "done"} key={con}>
           <a href="/" onClick={this.onContextClick.bind(this, con)}>
             {con}
           </a>
@@ -166,6 +170,34 @@ export default class Task extends React.Component {
         </span>
       );
     });
+  }
+
+  makeStatusSelector() {
+    return this.props.statuses.map(stat => {
+      return (
+        <span
+          className={
+            stat === this.props.task.status ? "context-selected" : "done"
+          }
+          key={stat}
+        >
+          <a href="/" onClick={this.onStatusClick.bind(this, stat)}>
+            {stat}
+          </a>
+          &nbsp;
+        </span>
+      );
+    });
+
+    return this.props.task.status;
+  }
+
+  makeEditMode() {
+    return (
+      <span>
+        {this.makeContextSelector()} {this.makeStatusSelector()}
+      </span>
+    );
   }
 
   render() {

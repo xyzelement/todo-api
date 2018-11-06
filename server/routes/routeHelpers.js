@@ -30,7 +30,8 @@ module.exports = {
       done: Joi.bool(),
       context: Joi.array()
         .items(Joi.string())
-        .required()
+        .required(),
+      status: Joi.string()
     }),
     taskDeleteSchema: Joi.object().keys({
       id: Joi.objectId().required()
@@ -39,7 +40,9 @@ module.exports = {
       id: Joi.objectId().required(),
       action: Joi.string(),
       star: Joi.bool(),
-      done: Joi.bool()
+      done: Joi.bool(),
+      context: Joi.array().items(Joi.string()),
+      status: Joi.string()
     })
   }
 };

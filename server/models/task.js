@@ -8,7 +8,8 @@ const taskSchema = new Schema({
   action: { type: String, required: true },
   star: { type: Boolean, required: true, default: false },
   done: { type: Boolean, required: true, default: false },
-  context: [{ type: String, required: true }]
+  context: [{ type: String, required: true }],
+  status: { type: String, required: true, default: "inbox" }
 });
 
 const Task = mongoose.model("task", taskSchema);

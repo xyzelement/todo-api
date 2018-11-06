@@ -6,7 +6,6 @@ import SignIn from "../../src/components/SignIn";
 import { reduxForm } from "redux-form";
 import { mountWithState } from "enzyme-redux";
 
-//enzyme.configure({ adapter: new Adapter() });
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("Testing SignIn", () => {
@@ -15,8 +14,8 @@ describe("Testing SignIn", () => {
       auth: state.auth
     });
 
-    const m = jest.fn();
-    SignIn.prototype.onSubmit = m;
+    const stub = jest.fn();
+    SignIn.prototype.onSubmit = stub;
     const SignInForm = reduxForm({ form: "signin" })(SignIn);
 
     const ConnectedComponent = connect(mapStateToProps)(SignInForm);
@@ -26,8 +25,8 @@ describe("Testing SignIn", () => {
     });
     const form = wrapper.find("form");
 
-    expect(m.mock.calls.length).toBe(0);
+    expect(stub.mock.calls.length).toBe(0);
     form.simulate("submit");
-    expect(m.mock.calls.length).toBe(1);
+    expect(stub.mock.calls.length).toBe(1);
   });
 });

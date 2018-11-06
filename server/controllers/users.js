@@ -87,6 +87,9 @@ module.exports = {
     if (req.value.body.done !== undefined) {
       update.done = req.value.body.done;
     }
+    if (req.value.body.context !== undefined) {
+      update.context = req.value.body.context;
+    }
 
     const result = await Task.updateOne({ email, _id }, update);
     return res.json({ success: result.nModified });

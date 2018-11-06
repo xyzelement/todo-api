@@ -1,8 +1,6 @@
 import React from "react";
-import { connect } from "react-redux";
-import * as actions from "../actions";
 
-class Task extends React.Component {
+export default class Task extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -99,6 +97,27 @@ class Task extends React.Component {
     this.setState({ editMode: false });
   }
 
+  toggleContext(arr, context) {
+    console.log(arr, context);
+    var i = arr.indexOf(context);
+    if (i === -1) {
+      arr.push(context);
+    } else if (arr.length > 1) {
+      arr.splice(i, 1);
+    }
+
+    console.log(arr);
+    return arr;
+  }
+
+  onContextClick(context, e) {
+    e.preventDefault();
+
+    this.props.updateTaskAction(this.props.auth.jwtToken, this.props.task._id, {
+      context: this.toggleContext([...this.props.task.context], context)
+    });
+  }
+
   onClick(action, e) {
     e.preventDefault();
 
@@ -126,9 +145,33 @@ class Task extends React.Component {
     );
   }
 
+  makeEditMode() {
+    return this.props.contexts.map(con => {
+      const current = this.props.task.context.includes(con);
+      if (current)
+        return (
+          <span className="context-selected" key={con}>
+            <a href="/" onClick={this.onContextClick.bind(this, con)}>
+              {con}
+            </a>
+            &nbsp;
+          </span>
+        );
+      return (
+        <span className="done" key={con}>
+          <a href="/" onClick={this.onContextClick.bind(this, con)}>
+            {con}
+          </a>
+          &nbsp;
+        </span>
+      );
+    });
+  }
+
   render() {
     return (
       <div className="task">
+        {this.props.mode === "edit" ? this.makeEditMode() : ""}
         {this.makeDelete()}
         {this.makeCheck(this.props.task)}
         {this.makeStar(this.props.task)}
@@ -137,14 +180,3 @@ class Task extends React.Component {
     );
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    auth: state.auth
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  actions
-)(Task);

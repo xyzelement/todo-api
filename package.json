@@ -31,8 +31,10 @@
     "server-dev": "nodemon --no-deprecation server/app.js",
     "client-dev": "npm start --prefix client",
     "start-dev": "concurrently \"npm run mongod\" \"npm run server-dev\" \"npm run client-dev\"",
-    "start": "concurrently \"npm run server-dev\"",
+    "start": "npm run server-dev",
     "test": "nyc mocha -t 2500 --no-deprecation --exit server/test",
+    "build": "cd client && npm install && npm run build",
+    "start-prod": "npm run build && concurrently \"npm run mongod\" \"npm run server-dev\"",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {

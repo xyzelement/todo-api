@@ -5,9 +5,21 @@ import { GET_TASKS } from "./types";
 import { AUTH_SIGNOUT } from "./types";
 import { UPDATE_TASKS, ADD_TASK, DELETE_TASK } from "./types";
 
-//const HOST = "http://" + window.location.hostname + ":5000";
-const HOST = "http://" + window.location.hostname;
+var HOST = window.location.hostname;
+var port = window.location.port;
 
+if (HOST === "localhost" && port === "3000") {
+  // Running in 2-server development configuration
+  // Web: 3000, API: 5000
+  HOST = "http://localhost:5000";
+} else {
+  // Running in single-server prod-like setup
+  //TODO may need to distinguish prod vs prod-like
+  HOST = "http://" + HOST + ":" + port;
+  console.log(HOST);
+}
+
+//const HOST = "http://" + window.location.hostname + ":" + window.location.port;
 export const signUpAction = formData => {
   return async dispatch => {
     /*

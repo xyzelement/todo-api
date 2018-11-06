@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import TaskWrapper from "./TaskWrapper";
 import AddTask from "./AddTask";
+import { Link } from "react-router-dom";
 
 class Tasks extends React.Component {
   constructor(props) {
@@ -44,9 +45,9 @@ class Tasks extends React.Component {
       <span>
         <span className="context">
           {this.renderContexts()}
-          <a style={{ float: "right" }} href="/signout">
+          <Link style={{ float: "right" }} to="/signout">
             Sign Out
-          </a>
+          </Link>
         </span>
         <span className={this.state.editMode ? "context-selected" : "context"}>
           <a

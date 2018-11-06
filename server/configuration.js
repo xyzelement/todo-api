@@ -1,4 +1,4 @@
 module.exports = {
-  //JWT_SECRET: "MY AWFUL SECRET"
-  JWT_SECRET: process.env.JWT_SECRET
+  //TODO: fail here if default kicks in production
+  JWT_SECRET: process.env.JWT_SECRET || "MY AWFUL SECRET"
 };

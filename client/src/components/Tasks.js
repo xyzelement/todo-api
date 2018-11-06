@@ -25,35 +25,39 @@ class Tasks extends React.Component {
   }
 
   renderContexts() {
-    return (
-      <div className="context">
-        {this.props.contexts.map(context => {
-          if (context === this.state.currentContext) {
-            return <span key={context}>{context} </span>;
-          } else {
-            return (
-              <a
-                href="/"
-                key={context}
-                onClick={this.onClick.bind(this, context)}
-              >
-                {context}{" "}
-              </a>
-            );
-          }
-        })}
-        <a style={{ float: "right" }} href="/signout">
-          Sign Out
-        </a>
+    if (this.state.editMode) return <span>&nbsp;</span>;
+    return this.props.contexts.map(context => {
+      if (context === this.state.currentContext) {
+        return <span key={context}>{context} </span>;
+      } else {
+        return (
+          <a href="/" key={context} onClick={this.onClick.bind(this, context)}>
+            {context}{" "}
+          </a>
+        );
+      }
+    });
+  }
 
-        <a
-          style={{ float: "right" }}
-          href="/"
-          onClick={this.toggleEditMode.bind(this)}
-        >
-          Edit&nbsp;
-        </a>
-      </div>
+  renderHeaders() {
+    return (
+      <span>
+        <span className="context">
+          {this.renderContexts()}
+          <a style={{ float: "right" }} href="/signout">
+            Sign Out
+          </a>
+        </span>
+        <span className={this.state.editMode ? "context-selected" : "context"}>
+          <a
+            style={{ float: "right" }}
+            href="/"
+            onClick={this.toggleEditMode.bind(this)}
+          >
+            Edit&nbsp;
+          </a>
+        </span>
+      </span>
     );
   }
 
@@ -62,7 +66,7 @@ class Tasks extends React.Component {
     return this.props.tasks
       .filter(task => {
         return (
-          this.state.currentContext === "All" ||
+          this.state.editMode ||
           task.context.includes(this.state.currentContext)
         );
       })
@@ -78,7 +82,7 @@ class Tasks extends React.Component {
   render() {
     return (
       <div>
-        {this.renderContexts()}
+        {this.renderHeaders()}
         <AddTask context={this.state.currentContext} />
         <br />
         {this.renderTasks()}
@@ -91,7 +95,7 @@ const mapStateToProps = state => {
   return {
     auth: state.auth,
     tasks: state.auth.tasks,
-    contexts: ["Work", "Home", "Phone", "All"]
+    contexts: ["Work", "Home", "Phone"]
   };
 };
 

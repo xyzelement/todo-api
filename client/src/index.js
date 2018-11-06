@@ -9,7 +9,7 @@ import reduxThunk from "redux-thunk";
 import * as serviceWorker from "./serviceWorker";
 import App from "./components/App";
 import SignUp from "./components/SignUp";
-import SignIn from "./components/SignIn";
+import SignInWrapper from "./components/SignInWrapper";
 import SignOut from "./components/SignOut";
 import Tasks from "./components/Tasks";
 import reducers from "./reducers";
@@ -30,8 +30,8 @@ ReactDOM.render(
   >
     <BrowserRouter>
       <App>
-        <Route exact path="/" component={SignIn} />
-        <Route exact path="/signin" component={SignIn} />
+        <Route exact path="/" component={SignInWrapper} />
+        <Route exact path="/signin" component={SignInWrapper} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/tasks" component={Tasks} />
         <Route exact path="/signout" component={SignOut} />

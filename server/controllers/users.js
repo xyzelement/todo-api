@@ -60,7 +60,8 @@ module.exports = {
     const star = req.value.body.star;
     const done = req.value.body.done;
     const context = req.value.body.context;
-    const newTask = new Task({ email, action, star, done, context });
+    const hist = [{ on: new Date(), what: action }];
+    const newTask = new Task({ email, action, star, done, context, hist });
     await newTask.save();
     res.json({ saved: newTask });
   },
@@ -93,6 +94,10 @@ module.exports = {
     if (req.value.body.status !== undefined) {
       update.status = req.value.body.status;
     }
+
+    const hist = [{ on: new Date(), what: { ...update } }];
+
+    update.$push = { hist };
 
     const result = await Task.updateOne({ email, _id }, update);
     return res.json({ success: result.nModified });

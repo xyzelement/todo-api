@@ -9,7 +9,8 @@ const taskSchema = new Schema({
   star: { type: Boolean, required: true, default: false },
   done: { type: Boolean, required: true, default: false },
   context: [{ type: String, required: true }],
-  status: { type: String, required: true, default: "inbox" }
+  status: { type: String, required: true, default: "inbox" },
+  hist: { type: Array, required: true }
 });
 
 const Task = mongoose.model("task", taskSchema);

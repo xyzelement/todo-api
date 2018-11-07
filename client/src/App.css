@@ -51,8 +51,9 @@ body {
 .action input {
   width: 50%;
   border-width: 0px;
+  font-family: monospace;
 
-  font-size: 1em;
+  font-size: 2em;
 }
 
 .action input:read-write {

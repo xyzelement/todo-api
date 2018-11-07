@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 export default class Task extends React.Component {
   constructor(props) {
@@ -78,6 +79,7 @@ export default class Task extends React.Component {
               defaultValue={task.action}
               onChange={this.onChange.bind(this)}
               onClick={this.onClick.bind(this, "edit")}
+              onBlur={this.onEdit.bind(this, "sub")}
             />
           </span>
         </form>
@@ -203,6 +205,19 @@ export default class Task extends React.Component {
     );
   }
 
+  makeAge() {
+    return (
+      <span>
+        <small>
+          {moment(this.props.task.hist[0].on).fromNow(true)}/
+          {moment(
+            this.props.task.hist[this.props.task.hist.length - 1].on
+          ).fromNow(true)}
+        </small>
+      </span>
+    );
+  }
+
   render() {
     return (
       <div className="task">
@@ -210,6 +225,7 @@ export default class Task extends React.Component {
         {this.makeCheck(this.props.task)}
         {this.makeStar(this.props.task)}
         {this.makeAction(this.props.task)}
+        {this.makeAge()}
       </div>
     );
   }

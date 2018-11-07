@@ -210,20 +210,15 @@ export default class Task extends React.Component {
 
   makeAge() {
     return (
-      <span>
-        <small>
-          {moment(this.props.task.hist[0].on).fromNow(true)}/
-          {moment(
-            this.props.task.hist[this.props.task.hist.length - 1].on
-          ).fromNow(true)}
-        </small>
+      <span className="task-age">
+        {moment(this.props.task.hist[0].on).fromNow(true)}
       </span>
     );
   }
 
   render() {
     return (
-      <div className="task">
+      <div>
         {this.props.mode === "edit" ? this.makeEditMode() : ""}
         {this.makeCheck(this.props.task)}
         {this.makeStar(this.props.task)}

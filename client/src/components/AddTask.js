@@ -26,19 +26,15 @@ class AddTask extends Component {
 
     return (
       <div>
-        <form onSubmit={handleSubmit(this.onSubmit)}>
+        <form className="add-item" onSubmit={handleSubmit(this.onSubmit)}>
           <Field
             name="action"
             type="text"
             id="action"
             label=""
-            placeholder="Add an action to do"
+            placeholder="+ Add Item"
             component={CustomInput}
           />
-
-          {
-            //<button type="submit">Add It</button>
-          }
         </form>
       </div>
     );

@@ -29,11 +29,12 @@ body {
   text-decoration: none;
 }
 
-.custom-input-box {
+.custom-input-label {
+  display: inline-block;
+  width: 20%;
   border-width: 0px;
-  border-bottom-width: 1px;
+  font-family: monospace;
 }
-
 .star-on a {
   color: black;
 }
@@ -41,6 +42,11 @@ body {
 .action {
   margin-left: 4px;
   margin-right: 4px;
+}
+
+.task-age {
+  color: gainsboro;
+  font-size: 1em;
 }
 
 .task {
@@ -53,7 +59,7 @@ body {
   border-width: 0px;
   font-family: monospace;
 
-  font-size: 2em;
+  font-size: 1.6em;
 }
 
 .done input {
@@ -65,8 +71,10 @@ body {
   font-weight: bold;
 }
 
+.add-item input:read-write {
+  align-content: left;
+}
 form {
-  font-size: 0.7em;
   display: inline;
 }
 

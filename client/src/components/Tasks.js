@@ -123,6 +123,7 @@ class Tasks extends React.Component {
     return (
       <div>
         {this.renderHeaders()}
+        <br />
         {this.renderAddBox()}
         <br />
         {this.renderTasks()}

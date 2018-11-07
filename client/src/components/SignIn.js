@@ -31,28 +31,25 @@ export default class SignIn extends Component {
       <div>
         <b>{this.helper()}</b>
         <form onSubmit={handleSubmit(this.onSubmit)}>
-          <fieldset>
-            <Field
-              name="email"
-              type="text"
-              id="email"
-              label="what's your email"
-              placeholder="ed@ed.ed?"
-              component={CustomInput}
-            />
-          </fieldset>
-          <fieldset>
-            <Field
-              name="password"
-              type="password"
-              id="password"
-              label="what's your password"
-              placeholder="ed"
-              component={CustomInput}
-            />
-          </fieldset>
+          <Field
+            name="email"
+            type="text"
+            id="email"
+            label="e-mail"
+            component={CustomInput}
+          />
+          <br />
+          <Field
+            name="password"
+            type="password"
+            id="password"
+            label="password"
+            component={CustomInput}
+          />
+          <br />
           <button type="submit">Sign In</button>
         </form>
+        <br />
         <Link to="/signup">Sign Up</Link>
       </div>
     );

@@ -56,6 +56,10 @@ body {
   font-size: 2em;
 }
 
+.done input {
+  color: gainsboro;
+}
+
 .action input:read-write {
   border-bottom-width: 2px;
   font-weight: bold;

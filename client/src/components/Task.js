@@ -64,27 +64,23 @@ export default class Task extends React.Component {
   }
 
   makeAction(task) {
-    if (task.done) {
-      return <span className="action done">{task.action}</span>;
-    } else {
-      return (
-        <form onSubmit={this.onEdit.bind(this, "sub")}>
-          <span className="action">
-            <input
-              type="text"
-              ref={input => {
-                this.nameInput = input;
-              }}
-              readOnly={!this.state.editMode}
-              defaultValue={task.action}
-              onChange={this.onChange.bind(this)}
-              onClick={this.onClick.bind(this, "edit")}
-              onBlur={this.onEdit.bind(this, "sub")}
-            />
-          </span>
-        </form>
-      );
-    }
+    return (
+      <form onSubmit={this.onEdit.bind(this, "sub")}>
+        <span className={task.done ? "action done" : "action"}>
+          <input
+            type="text"
+            ref={input => {
+              this.nameInput = input;
+            }}
+            readOnly={!this.state.editMode}
+            defaultValue={task.action}
+            onChange={this.onChange.bind(this)}
+            onClick={this.onClick.bind(this, "edit")}
+            onBlur={this.onEdit.bind(this, "sub")}
+          />
+        </span>
+      </form>
+    );
   }
 
   onChange(e) {
@@ -93,9 +89,16 @@ export default class Task extends React.Component {
 
   onEdit(action, e) {
     e.preventDefault();
-    this.props.updateTaskAction(this.props.auth.jwtToken, this.props.task._id, {
-      action: this.state.newAction
-    });
+
+    if (this.state.newAction && this.state.newAction.length > 0) {
+      this.props.updateTaskAction(
+        this.props.auth.jwtToken,
+        this.props.task._id,
+        {
+          action: this.state.newAction
+        }
+      );
+    }
     this.setState({ editMode: false });
   }
 

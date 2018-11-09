@@ -29,6 +29,7 @@ router
 
 //TODO: this should be in a TASK routes
 router.route("/tasks").get(authenticateWithJwt, UsersController.tasks);
+router.route("/sprints").get(authenticateWithJwt, UsersController.sprints);
 
 router
   .route("/task")

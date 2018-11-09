@@ -3,7 +3,7 @@ import { AUTH_SIGNUP } from "./types";
 import { AUTH_ERROR } from "./types";
 import { GET_TASKS } from "./types";
 import { AUTH_SIGNOUT } from "./types";
-import { UPDATE_TASKS, ADD_TASK, DELETE_TASK } from "./types";
+import { UPDATE_TASKS, ADD_TASK, DELETE_TASK, GET_SPRINTS } from "./types";
 
 var HOST = window.location.hostname;
 var port = window.location.port;
@@ -91,6 +91,22 @@ export const getTasksAction = token => {
       });
     } catch (error) {
       console.log("getTasksAction error", error, token);
+    }
+  };
+};
+
+export const getSprintsAction = token => {
+  return async dispatch => {
+    try {
+      const res = await axios.get(HOST + "/users/sprints", {
+        headers: { Authorization: "jwt " + token }
+      });
+      dispatch({
+        type: GET_SPRINTS,
+        payload: res.data
+      });
+    } catch (error) {
+      console.log("getSprintsAction error", error, token);
     }
   };
 };

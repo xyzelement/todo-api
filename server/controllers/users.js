@@ -53,6 +53,16 @@ module.exports = {
     res.json({ tasks });
   },
 
+  sprints: async (req, res, next) => {
+    const date = Date.now();
+    //TODO: get these from database
+    res.json([
+      { start: date, end: undefined },
+      { start: date, end: date },
+      { start: date, end: date }
+    ]);
+  },
+
   //TODO: this should also be in the Tasks controller
   addTask: async (req, res, next) => {
     const email = req.user.email;

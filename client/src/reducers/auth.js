@@ -5,7 +5,8 @@ import {
   UPDATE_TASKS,
   GET_TASKS,
   ADD_TASK,
-  DELETE_TASK
+  DELETE_TASK,
+  GET_SPRINTS
 } from "../actions/types";
 
 const DEFAULT_STATE = {
@@ -69,8 +70,12 @@ export default (state = DEFAULT_STATE, action) => {
       out_delete_state.tasks = state.tasks.filter(item => {
         return item._id !== action.payload.id;
       });
-
       return out_delete_state;
+
+    case GET_SPRINTS:
+      console.log("Auth: GET_SPRINTS", action.payload);
+      var out_sprints = { ...state, sprints: action.payload };
+      return out_sprints;
 
     default:
       return state; // No change to state from weird actions

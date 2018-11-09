@@ -4,6 +4,7 @@ import * as actions from "../actions";
 import TaskWrapper from "./TaskWrapper";
 import AddTask from "./AddTask";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 class Tasks extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class Tasks extends React.Component {
   }
   componentWillMount() {
     this.props.getTasksAction(this.props.auth.jwtToken);
+    this.props.getSprintsAction(this.props.auth.jwtToken);
     this.setState({ currentContext: this.props.contexts[0] });
   }
 
@@ -51,8 +53,18 @@ class Tasks extends React.Component {
   }
 
   renderHeaders() {
+    var thisSprint = "";
+    if (this.props.sprints) {
+      thisSprint = this.props.sprints.find(sprint => {
+        return sprint.end === undefined;
+      });
+      if (thisSprint) {
+        thisSprint = moment(thisSprint.start).format("MMM Do YYYY");
+      }
+    }
     return (
       <span>
+        <b>[{thisSprint}] </b>
         <span className="context">
           {this.renderContexts()}
           <Link style={{ float: "right" }} to="/signout">
@@ -136,6 +148,7 @@ const mapStateToProps = state => {
   return {
     auth: state.auth,
     tasks: state.auth.tasks,
+    sprints: state.auth.sprints,
     contexts: ["Work", "Home", "Phone"]
   };
 };

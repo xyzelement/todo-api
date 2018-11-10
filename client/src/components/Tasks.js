@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
-import * as sprintsActions from "../actions/sprints";
+import * as sprintsActions from "../actions/sprint_actions";
 import TaskWrapper from "./TaskWrapper";
 import AddTask from "./AddTask";
 import Sprint from "./Sprint";

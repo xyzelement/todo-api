@@ -3,7 +3,7 @@ import * as actions from "../actions";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import moment from "moment";
-import * as sprintsActions from "../actions/sprints";
+import * as sprintsActions from "../actions/sprint_actions";
 
 class AddSprint extends Component {
   async onStart(e) {

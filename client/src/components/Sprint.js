@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import * as actions from "../actions";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import moment from "moment";
@@ -69,12 +68,12 @@ class AddSprint extends Component {
 }
 
 function mapStateToProps(state) {
-  return { auth: state.auth, sprints: state.auth.sprints };
+  return { auth: state.auth, sprints: state.sprint.sprints };
 }
 
 export default compose(
   connect(
     mapStateToProps,
-    { ...actions, ...sprintsActions }
+    sprintsActions
   )
 )(AddSprint);

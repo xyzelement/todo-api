@@ -22,29 +22,47 @@ class AddSprint extends Component {
       : undefined;
   }
 
-  sprintState() {
+  sprintIsOn() {
     var last = this.getLast();
-    return last && last.end ? <i>DONE</i> : <i>NOT DOTE</i>;
+    return last && !last.end;
   }
 
-  render() {
-    var last = this.getLast();
-    if (last) {
-      last = this.props.sprints.length + ":" + moment(last.start).fromNow();
-    }
-
-    return (
-      <span>
-        {this.sprintState()}[{last}]
-        <a href="/" onClick={this.onStart.bind(this)}>
-          Start
-        </a>
-        &nbsp;
+  makeSprintToggle() {
+    if (this.sprintIsOn())
+      return (
         <a href="/" onClick={this.onStop.bind(this)}>
           Stop
         </a>
-        &nbsp;
-      </span>
+      );
+    else
+      return (
+        <a href="/" onClick={this.onStart.bind(this)}>
+          Start
+        </a>
+      );
+  }
+
+  makeActiveSprint() {
+    if (!this.sprintIsOn()) {
+      return "";
+    }
+
+    const last = this.getLast();
+    const out =
+      "Sprint " +
+      this.props.sprints.length +
+      "(" +
+      moment(last.start).fromNow() +
+      ")";
+    return out;
+  }
+
+  render() {
+    return (
+      <div className="sprint">
+        {this.makeActiveSprint()}
+        {this.makeSprintToggle()}
+      </div>
     );
   }
 }

@@ -82,3 +82,13 @@ form {
   text-decoration: none;
   color: gainsboro;
 }
+
+.sprint {
+  color: gainsboro;
+  float: right;
+}
+
+.sprint a {
+  text-decoration: none;
+  color: gainsboro;
+}

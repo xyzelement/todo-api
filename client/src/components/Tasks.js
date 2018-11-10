@@ -54,43 +54,43 @@ class Tasks extends React.Component {
 
   renderHeaders() {
     return (
-      <span>
-        <b>
-          <Sprint />
-        </b>
-        <span className="context">
-          {this.renderContexts()}
-          <Link style={{ float: "right" }} to="/signout">
-            Sign Out
-          </Link>
-        </span>
-        <span
-          className={
-            this.state.editMode === "edit" ? "context-selected" : "context"
-          }
-        >
-          <a
-            style={{ float: "right" }}
-            href="/"
-            onClick={this.toggleEditMode.bind(this, "edit")}
+      <div>
+        <div>
+          <span className="context">
+            {this.renderContexts()}
+            <Link style={{ float: "right" }} to="/signout">
+              Sign Out
+            </Link>
+          </span>
+          <span
+            className={
+              this.state.editMode === "edit" ? "context-selected" : "context"
+            }
           >
-            Edit&nbsp;
-          </a>
-        </span>
-        <span
-          className={
-            this.state.editMode === "inbox" ? "context-selected" : "context"
-          }
-        >
-          <a
-            style={{ float: "right" }}
-            href="/"
-            onClick={this.toggleEditMode.bind(this, "inbox")}
+            <a
+              style={{ float: "right" }}
+              href="/"
+              onClick={this.toggleEditMode.bind(this, "edit")}
+            >
+              Edit&nbsp;
+            </a>
+          </span>
+          <span
+            className={
+              this.state.editMode === "inbox" ? "context-selected" : "context"
+            }
           >
-            Inbox&nbsp;
-          </a>
-        </span>
-      </span>
+            <a
+              style={{ float: "right" }}
+              href="/"
+              onClick={this.toggleEditMode.bind(this, "inbox")}
+            >
+              Inbox&nbsp;
+            </a>
+          </span>
+        </div>
+        <Sprint />
+      </div>
     );
   }
 
@@ -132,6 +132,7 @@ class Tasks extends React.Component {
         {this.renderAddBox()}
         <br />
         {this.renderTasks()}
+        <br />
       </div>
     );
   }

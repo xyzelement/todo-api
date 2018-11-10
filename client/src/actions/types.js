@@ -23,7 +23,6 @@ if (host === "localhost" && port === "3000") {
   // Running in single-server prod-like setup
   //TODO may need to distinguish prod vs prod-like
   host = window.location.protocol + "//" + host + ":" + port;
-  console.log(host);
 }
 
 export const HOST = host;

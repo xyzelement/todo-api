@@ -90,7 +90,7 @@ class Tasks extends React.Component {
             </a>
           </span>
         </div>
-        <Sprint />
+        {this.state.editMode ? <Sprint /> : ""}
       </div>
     );
   }

@@ -209,6 +209,7 @@ export default class Task extends React.Component {
   }
 
   makeAge() {
+    if (this.props.mode !== "edit") return "";
     return (
       <span className="task-age">
         {moment(this.props.task.hist[0].on).fromNow(true)}

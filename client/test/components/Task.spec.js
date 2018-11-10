@@ -22,13 +22,13 @@ describe("Testing Task Component", () => {
 
     const wrapper = mountWithState(<ConnectedComponent mode="work" />, {
       auth: { isAuthenticated: true },
-      task: { done: false, context: [] }
+      task: { done: false, context: [], hist: [{ on: new Date() }] }
     });
     expect(m.mock.calls.length).toBe(0);
 
     const wrapper2 = mountWithState(<ConnectedComponent mode="edit" />, {
       auth: { isAuthenticated: true },
-      task: { done: false, context: [] }
+      task: { done: false, context: [], hist: [{ on: new Date() }] }
     });
     expect(m.mock.calls.length).toBe(1);
   });

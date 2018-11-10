@@ -1,4 +1,4 @@
-import { GET_SPRINTS, ADD_SPRINT, STOP_SPRINT } from "../actions/types";
+import { GET_SPRINTS, ADD_SPRINT, STOP_SPRINT } from "./types";
 
 const DEFAULT_STATE = {
   sprints: [],

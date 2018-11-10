@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
 
 import authReducer from "./auth";
-import sprintReducer from "./sprint_reducer";
+import sprintReducer from "../actions/sprint_reducer";
 
 // A reducer is a pure function that takes the previous
 // state and action and returns the next state.

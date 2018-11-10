@@ -1,4 +1,4 @@
-const express = require("express");
+//const express = require("express");
 const router = require("express-promise-router")();
 const UsersController = require("../controllers/users");
 const { validateBody, schemas } = require("./routeHelpers");
@@ -29,20 +29,6 @@ router
 
 //TODO: this should be in a TASK routes
 router.route("/tasks").get(authenticateWithJwt, UsersController.tasks);
-router.route("/sprints").get(authenticateWithJwt, UsersController.sprints);
-
-router
-  .route("/sprint")
-  .post(
-    validateBody(schemas.sprintAddSchema),
-    authenticateWithJwt,
-    UsersController.addSprint
-  )
-  .put(
-    validateBody(schemas.sprintStopSchema),
-    authenticateWithJwt,
-    UsersController.stopSprint
-  );
 
 router
   .route("/task")

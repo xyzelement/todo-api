@@ -5,7 +5,7 @@ import { HOST } from "./types";
 export const getSprintsAction = token => {
   return async dispatch => {
     try {
-      const res = await axios.get(HOST + "/users/sprints", {
+      const res = await axios.get(HOST + "/sprints", {
         headers: { Authorization: "jwt " + token }
       });
       dispatch({
@@ -22,7 +22,7 @@ export const addSprintAction = token => {
   return async dispatch => {
     try {
       const res = await axios.post(
-        HOST + "/users/sprint",
+        HOST + "/sprints",
         {},
         {
           headers: { Authorization: "jwt " + token }
@@ -42,7 +42,7 @@ export const stopSprintAction = (token, id) => {
   return async dispatch => {
     try {
       const res = await axios.put(
-        HOST + "/users/sprint",
+        HOST + "/sprints",
         { id },
         {
           headers: { Authorization: "jwt " + token }

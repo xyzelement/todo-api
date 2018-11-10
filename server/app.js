@@ -3,7 +3,7 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const path = require("path");
+
 mongoose.connect(
   process.env.MONGO_URI || "mongodb://localhost/TODO",
   { useNewUrlParser: true }
@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use("/users", require("./routes/users"));
+app.use("/sprints", require("./routes/sprint_routes"));
 
 app.use("/", express.static(__dirname + "/../client/build"));
 

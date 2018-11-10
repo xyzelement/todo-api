@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import TaskWrapper from "./TaskWrapper";
 import AddTask from "./AddTask";
+import Sprint from "./Sprint";
 import { Link } from "react-router-dom";
-import moment from "moment";
 
 class Tasks extends React.Component {
   constructor(props) {
@@ -53,18 +53,11 @@ class Tasks extends React.Component {
   }
 
   renderHeaders() {
-    var thisSprint = "";
-    if (this.props.sprints) {
-      thisSprint = this.props.sprints.find(sprint => {
-        return sprint.end === undefined;
-      });
-      if (thisSprint) {
-        thisSprint = moment(thisSprint.start).format("MMM Do YYYY");
-      }
-    }
     return (
       <span>
-        <b>[{thisSprint}] </b>
+        <b>
+          <Sprint />
+        </b>
         <span className="context">
           {this.renderContexts()}
           <Link style={{ float: "right" }} to="/signout">

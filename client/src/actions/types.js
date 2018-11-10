@@ -9,3 +9,5 @@ export const ADD_TASK = "ADD_TASK";
 export const DELETE_TASK = "DELETE_TASK";
 
 export const GET_SPRINTS = "GET_SPRINTS";
+export const ADD_SPRINT = "ADD_SPRINT";
+export const STOP_SPRINT = "STOP_SPRINT";

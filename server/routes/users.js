@@ -32,6 +32,19 @@ router.route("/tasks").get(authenticateWithJwt, UsersController.tasks);
 router.route("/sprints").get(authenticateWithJwt, UsersController.sprints);
 
 router
+  .route("/sprint")
+  .post(
+    validateBody(schemas.sprintAddSchema),
+    authenticateWithJwt,
+    UsersController.addSprint
+  )
+  .put(
+    validateBody(schemas.sprintStopSchema),
+    authenticateWithJwt,
+    UsersController.stopSprint
+  );
+
+router
   .route("/task")
   .post(
     validateBody(schemas.taskAddSchema),

@@ -29,7 +29,6 @@ class AddSprint extends Component {
 
   render() {
     var last = this.getLast();
-    console.log("AAAAA", last);
     if (last) {
       last = this.props.sprints.length + ":" + moment(last.start).fromNow();
     }

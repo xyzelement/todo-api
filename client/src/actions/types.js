@@ -11,3 +11,19 @@ export const DELETE_TASK = "DELETE_TASK";
 export const GET_SPRINTS = "GET_SPRINTS";
 export const ADD_SPRINT = "ADD_SPRINT";
 export const STOP_SPRINT = "STOP_SPRINT";
+
+var host = window.location.hostname;
+var port = window.location.port;
+
+if (host === "localhost" && port === "3000") {
+  // Running in 2-server development configuration
+  // Web: 3000, API: 5000
+  host = "http://localhost:5000";
+} else {
+  // Running in single-server prod-like setup
+  //TODO may need to distinguish prod vs prod-like
+  host = window.location.protocol + "//" + host + ":" + port;
+  console.log(host);
+}
+
+export const HOST = host;

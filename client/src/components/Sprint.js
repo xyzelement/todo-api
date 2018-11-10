@@ -3,6 +3,7 @@ import * as actions from "../actions";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import moment from "moment";
+import * as sprintsActions from "../actions/sprints";
 
 class AddSprint extends Component {
   async onStart(e) {
@@ -74,6 +75,6 @@ function mapStateToProps(state) {
 export default compose(
   connect(
     mapStateToProps,
-    actions
+    { ...actions, ...sprintsActions }
   )
 )(AddSprint);

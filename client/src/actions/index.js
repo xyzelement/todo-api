@@ -3,30 +3,10 @@ import { AUTH_SIGNUP } from "./types";
 import { AUTH_ERROR } from "./types";
 import { GET_TASKS } from "./types";
 import { AUTH_SIGNOUT } from "./types";
-import {
-  UPDATE_TASKS,
-  ADD_TASK,
-  DELETE_TASK,
-  GET_SPRINTS,
-  ADD_SPRINT,
-  STOP_SPRINT
-} from "./types";
+import { UPDATE_TASKS, ADD_TASK, DELETE_TASK } from "./types";
 
-var HOST = window.location.hostname;
-var port = window.location.port;
+import { HOST } from "./types";
 
-if (HOST === "localhost" && port === "3000") {
-  // Running in 2-server development configuration
-  // Web: 3000, API: 5000
-  HOST = "http://localhost:5000";
-} else {
-  // Running in single-server prod-like setup
-  //TODO may need to distinguish prod vs prod-like
-  HOST = window.location.protocol + "//" + HOST + ":" + port;
-  console.log(HOST);
-}
-
-//const HOST = "http://" + window.location.hostname + ":" + window.location.port;
 export const signUpAction = formData => {
   return async dispatch => {
     /*
@@ -98,62 +78,6 @@ export const getTasksAction = token => {
       });
     } catch (error) {
       console.log("getTasksAction error", error, token);
-    }
-  };
-};
-
-export const getSprintsAction = token => {
-  return async dispatch => {
-    try {
-      const res = await axios.get(HOST + "/users/sprints", {
-        headers: { Authorization: "jwt " + token }
-      });
-      dispatch({
-        type: GET_SPRINTS,
-        payload: res.data.sprints
-      });
-    } catch (error) {
-      console.log("getSprintsAction error", error, token);
-    }
-  };
-};
-
-export const addSprintAction = token => {
-  return async dispatch => {
-    try {
-      const res = await axios.post(
-        HOST + "/users/sprint",
-        {},
-        {
-          headers: { Authorization: "jwt " + token }
-        }
-      );
-      dispatch({
-        type: ADD_SPRINT,
-        payload: res.data.saved
-      });
-    } catch (error) {
-      console.log("addSprintAction error", error, token);
-    }
-  };
-};
-
-export const stopSprintAction = (token, id) => {
-  return async dispatch => {
-    try {
-      const res = await axios.put(
-        HOST + "/users/sprint",
-        { id },
-        {
-          headers: { Authorization: "jwt " + token }
-        }
-      );
-      dispatch({
-        type: STOP_SPRINT,
-        payload: res.data.end
-      });
-    } catch (error) {
-      console.log("addSprintAction error", error, token);
     }
   };
 };

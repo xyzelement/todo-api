@@ -217,12 +217,17 @@ export default class Task extends React.Component {
     );
   }
 
+  makeSprint(task) {
+    return <i>.. {task.sprint} ..</i>;
+  }
+
   render() {
     return (
       <div>
         {this.props.mode === "edit" ? this.makeEditMode() : ""}
         {this.makeCheck(this.props.task)}
         {this.makeStar(this.props.task)}
+        {this.makeSprint(this.props.task)}
         {this.makeAction(this.props.task)}
         {this.makeAge()}
       </div>

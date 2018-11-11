@@ -3,11 +3,20 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import moment from "moment";
 import * as sprintsActions from "../actions/sprint_actions";
+import * as actions from "../actions";
 
 class AddSprint extends Component {
   async onStart(e) {
     e.preventDefault();
+
     await this.props.addSprintAction(this.props.auth.jwtToken);
+
+    for (var taskId in this.props.tasks) {
+      var task = this.props.tasks[taskId];
+      this.props.updateTaskAction(this.props.auth.jwtToken, task._id, {
+        sprint: this.props.sprints.current.start
+      });
+    }
   }
 
   async onStop(e) {
@@ -58,12 +67,12 @@ class AddSprint extends Component {
 }
 
 function mapStateToProps(state) {
-  return { auth: state.auth, sprints: state.sprints };
+  return { auth: state.auth, sprints: state.sprints, tasks: state.auth.tasks };
 }
 
 export default compose(
   connect(
     mapStateToProps,
-    sprintsActions
+    { ...sprintsActions, ...actions }
   )
 )(AddSprint);

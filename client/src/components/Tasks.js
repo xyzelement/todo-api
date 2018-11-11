@@ -96,6 +96,10 @@ class Tasks extends React.Component {
   }
 
   renderTasks() {
+    if (!this.props.sprints.current && !this.state.editMode) {
+      return <b>No current sprint in action</b>;
+    }
+
     if (!this.props.tasks) return null;
     return this.props.tasks
       .filter(task => {
@@ -143,7 +147,7 @@ const mapStateToProps = state => {
   return {
     auth: state.auth,
     tasks: state.auth.tasks,
-    sprints: state.auth.sprints,
+    sprints: state.sprints,
     contexts: ["Work", "Home", "Phone"]
   };
 };

@@ -12,5 +12,5 @@ export default combineReducers({
   // reducer takes care of state transitions for us? Maybe?
   form: formReducer,
   auth: authReducer,
-  sprint: sprintReducer
+  sprints: sprintReducer
 });

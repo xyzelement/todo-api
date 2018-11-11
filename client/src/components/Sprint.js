@@ -12,23 +12,14 @@ class AddSprint extends Component {
 
   async onStop(e) {
     e.preventDefault();
-    var last = this.props.sprints[this.props.sprints.length - 1];
-    await this.props.stopSprintAction(this.props.auth.jwtToken, last._id);
-  }
-
-  getLast() {
-    return this.props.sprints
-      ? this.props.sprints[this.props.sprints.length - 1]
-      : undefined;
-  }
-
-  sprintIsOn() {
-    var last = this.getLast();
-    return last && !last.end;
+    await this.props.stopSprintAction(
+      this.props.auth.jwtToken,
+      this.props.sprints.current._id
+    );
   }
 
   makeSprintToggle() {
-    if (this.sprintIsOn())
+    if (this.props.sprints.current)
       return (
         <a href="/" onClick={this.onStop.bind(this)}>
           Stop
@@ -43,16 +34,15 @@ class AddSprint extends Component {
   }
 
   makeActiveSprint() {
-    if (!this.sprintIsOn()) {
+    if (!this.props.sprints.current) {
       return "";
     }
 
-    const last = this.getLast();
     const out =
       "Sprint " +
-      this.props.sprints.length +
+      this.props.sprints.sprints.length +
       "(" +
-      moment(last.start).fromNow() +
+      moment(this.props.sprints.current).fromNow() +
       ")";
     return out;
   }
@@ -68,7 +58,7 @@ class AddSprint extends Component {
 }
 
 function mapStateToProps(state) {
-  return { auth: state.auth, sprints: state.sprint.sprints };
+  return { auth: state.auth, sprints: state.sprints };
 }
 
 export default compose(

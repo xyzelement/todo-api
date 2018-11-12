@@ -94,7 +94,9 @@ module.exports = {
     if (req.value.body.status !== undefined) {
       update.status = req.value.body.status;
     }
-
+    if (req.value.body.sprint !== undefined) {
+      update.sprint = req.value.body.sprint;
+    }
     const hist = [{ on: new Date(), what: { ...update } }];
 
     update.$push = { hist };

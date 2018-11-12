@@ -1,8 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import * as sprintsActions from "../actions/sprint_actions";
 import TaskWrapper from "./TaskWrapper";
 import AddTask from "./AddTask";
+import Sprint from "./Sprint";
 import { Link } from "react-router-dom";
 
 class Tasks extends React.Component {
@@ -12,6 +14,7 @@ class Tasks extends React.Component {
   }
   componentWillMount() {
     this.props.getTasksAction(this.props.auth.jwtToken);
+    this.props.getSprintsAction(this.props.auth.jwtToken);
     this.setState({ currentContext: this.props.contexts[0] });
   }
 
@@ -23,7 +26,7 @@ class Tasks extends React.Component {
   toggleEditMode(mode, e) {
     e.preventDefault();
 
-    var newMode = undefined;
+    let newMode = undefined;
     if (this.state.editMode === undefined) {
       newMode = mode;
     } else if (this.state.editMode === mode) {
@@ -52,44 +55,51 @@ class Tasks extends React.Component {
 
   renderHeaders() {
     return (
-      <span>
-        <span className="context">
-          {this.renderContexts()}
-          <Link style={{ float: "right" }} to="/signout">
-            Sign Out
-          </Link>
-        </span>
-        <span
-          className={
-            this.state.editMode === "edit" ? "context-selected" : "context"
-          }
-        >
-          <a
-            style={{ float: "right" }}
-            href="/"
-            onClick={this.toggleEditMode.bind(this, "edit")}
+      <div>
+        <div>
+          <span className="context">
+            {this.renderContexts()}
+            <Link style={{ float: "right" }} to="/signout">
+              Sign Out
+            </Link>
+          </span>
+          <span
+            className={
+              this.state.editMode === "edit" ? "context-selected" : "context"
+            }
           >
-            Edit&nbsp;
-          </a>
-        </span>
-        <span
-          className={
-            this.state.editMode === "inbox" ? "context-selected" : "context"
-          }
-        >
-          <a
-            style={{ float: "right" }}
-            href="/"
-            onClick={this.toggleEditMode.bind(this, "inbox")}
+            <a
+              style={{ float: "right" }}
+              href="/"
+              onClick={this.toggleEditMode.bind(this, "edit")}
+            >
+              Edit&nbsp;
+            </a>
+          </span>
+          <span
+            className={
+              this.state.editMode === "inbox" ? "context-selected" : "context"
+            }
           >
-            Inbox&nbsp;
-          </a>
-        </span>
-      </span>
+            <a
+              style={{ float: "right" }}
+              href="/"
+              onClick={this.toggleEditMode.bind(this, "inbox")}
+            >
+              Inbox&nbsp;
+            </a>
+          </span>
+        </div>
+        {this.state.editMode ? <Sprint /> : ""}
+      </div>
     );
   }
 
   renderTasks() {
+    if (!this.props.sprints.current && !this.state.editMode) {
+      return <b>No current sprint in action...</b>;
+    }
+
     if (!this.props.tasks) return null;
     return this.props.tasks
       .filter(task => {
@@ -102,6 +112,12 @@ class Tasks extends React.Component {
           (!this.state.editMode &&
             task.status === "action" &&
             task.context.includes(this.state.currentContext))
+        );
+      })
+      .filter(task => {
+        return (
+          this.state.editMode ||
+          task.sprint.getTime() === this.props.sprints.current.start.getTime()
         );
       })
       .map(task => (
@@ -127,6 +143,7 @@ class Tasks extends React.Component {
         {this.renderAddBox()}
         <br />
         {this.renderTasks()}
+        <br />
       </div>
     );
   }
@@ -136,11 +153,12 @@ const mapStateToProps = state => {
   return {
     auth: state.auth,
     tasks: state.auth.tasks,
+    sprints: state.sprints,
     contexts: ["Work", "Home", "Phone"]
   };
 };
 
 export default connect(
   mapStateToProps,
-  actions
+  { ...actions, ...sprintsActions }
 )(Tasks);

@@ -5,21 +5,8 @@ import { GET_TASKS } from "./types";
 import { AUTH_SIGNOUT } from "./types";
 import { UPDATE_TASKS, ADD_TASK, DELETE_TASK } from "./types";
 
-var HOST = window.location.hostname;
-var port = window.location.port;
+import { HOST } from "./types";
 
-if (HOST === "localhost" && port === "3000") {
-  // Running in 2-server development configuration
-  // Web: 3000, API: 5000
-  HOST = "http://localhost:5000";
-} else {
-  // Running in single-server prod-like setup
-  //TODO may need to distinguish prod vs prod-like
-  HOST = window.location.protocol + "//" + HOST + ":" + port;
-  console.log(HOST);
-}
-
-//const HOST = "http://" + window.location.hostname + ":" + window.location.port;
 export const signUpAction = formData => {
   return async dispatch => {
     /*
@@ -77,17 +64,25 @@ export const getTasksAction = token => {
       });
       dispatch({
         type: GET_TASKS,
-        payload: res.data.tasks.sort((a, b) => {
-          if (a.done === b.done) {
-            if (a.star === b.star) {
-              return 0;
+        payload: res.data.tasks
+          .sort((a, b) => {
+            if (a.done === b.done) {
+              if (a.star === b.star) {
+                return 0;
+              } else {
+                return b.star;
+              }
             } else {
-              return b.star;
+              return a.done;
             }
-          } else {
-            return a.done;
-          }
-        })
+          })
+          .map(task => {
+            if (task.sprint) {
+              return { ...task, sprint: new Date(task.sprint) };
+            }
+
+            return task;
+          })
       });
     } catch (error) {
       console.log("getTasksAction error", error, token);

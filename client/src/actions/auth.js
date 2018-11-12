@@ -6,7 +6,7 @@ import {
   GET_TASKS,
   ADD_TASK,
   DELETE_TASK
-} from "../actions/types";
+} from "./types";
 
 const DEFAULT_STATE = {
   isAuthenticated: false,
@@ -69,7 +69,6 @@ export default (state = DEFAULT_STATE, action) => {
       out_delete_state.tasks = state.tasks.filter(item => {
         return item._id !== action.payload.id;
       });
-
       return out_delete_state;
 
     default:

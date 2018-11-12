@@ -10,7 +10,8 @@ const taskSchema = new Schema({
   done: { type: Boolean, required: true, default: false },
   context: [{ type: String, required: true }],
   status: { type: String, required: true, default: "inbox" },
-  hist: { type: Array, required: true }
+  hist: { type: Array, required: true },
+  sprint: { type: Date, default: undefined }
 });
 
 const Task = mongoose.model("task", taskSchema);

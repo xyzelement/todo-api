@@ -26,7 +26,7 @@ class Tasks extends React.Component {
   toggleEditMode(mode, e) {
     e.preventDefault();
 
-    var newMode = undefined;
+    let newMode = undefined;
     if (this.state.editMode === undefined) {
       newMode = mode;
     } else if (this.state.editMode === mode) {
@@ -97,7 +97,7 @@ class Tasks extends React.Component {
 
   renderTasks() {
     if (!this.props.sprints.current && !this.state.editMode) {
-      return <b>No current sprint in action</b>;
+      return <b>No current sprint in action...</b>;
     }
 
     if (!this.props.tasks) return null;
@@ -112,6 +112,15 @@ class Tasks extends React.Component {
           (!this.state.editMode &&
             task.status === "action" &&
             task.context.includes(this.state.currentContext))
+        );
+      })
+      .filter(task => {
+        console.log(
+          typeof task.sprint,
+          typeof this.props.sprints.current.start
+        );
+        return (
+          this.state.editMode || task.sprint === this.props.sprints.current
         );
       })
       .map(task => (

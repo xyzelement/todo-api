@@ -155,7 +155,7 @@ export default class Task extends React.Component {
       return;
     }
 
-    var out = {};
+    let out = {};
     out[action] = !this.props.task[action];
 
     this.props.updateTaskAction(
@@ -218,7 +218,8 @@ export default class Task extends React.Component {
   }
 
   makeSprint(task) {
-    return <i>.. {task.sprint} ..</i>;
+    if (task.sprint) return <i>[{moment(task.sprint).fromNow()}]</i>;
+    else return "...";
   }
 
   render() {

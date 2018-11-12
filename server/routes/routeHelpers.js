@@ -41,7 +41,7 @@ module.exports = {
       done: Joi.bool(),
       context: Joi.array().items(Joi.string()),
       status: Joi.string(),
-      sprint: Joi.string()
+      sprint: Joi.date()
     }),
     sprintAddSchema: Joi.object().keys({}),
     sprintStopSchema: Joi.object().keys({ id: Joi.objectId().required() })

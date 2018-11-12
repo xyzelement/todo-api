@@ -11,11 +11,15 @@ class AddSprint extends Component {
 
     await this.props.addSprintAction(this.props.auth.jwtToken);
 
-    for (var taskId in this.props.tasks) {
-      var task = this.props.tasks[taskId];
-      this.props.updateTaskAction(this.props.auth.jwtToken, task._id, {
-        sprint: this.props.sprints.current.start
-      });
+    // Make all un-sprinted items
+    // part of this sprint
+    for (const taskId in this.props.tasks) {
+      const task = this.props.tasks[taskId];
+      if (!task.sprint) {
+        this.props.updateTaskAction(this.props.auth.jwtToken, task._id, {
+          sprint: this.props.sprints.current.start
+        });
+      }
     }
   }
 

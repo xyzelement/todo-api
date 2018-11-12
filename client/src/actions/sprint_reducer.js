@@ -23,9 +23,10 @@ export default (state = DEFAULT_STATE, action) => {
 
     case ADD_SPRINT:
       console.log("Auth: ADD_SPRINT", action.payload);
-      var out_add_sprint = { ...state, sprints: [...state.sprints] };
+      let out_add_sprint = { ...state, sprints: [...state.sprints] };
       out_add_sprint.sprints.push(action.payload);
       out_add_sprint.current = action.payload;
+
       return out_add_sprint;
 
     case STOP_SPRINT:

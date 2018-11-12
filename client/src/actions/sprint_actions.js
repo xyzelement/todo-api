@@ -5,8 +5,12 @@ import { HOST } from "./types";
 export const getSprintsAction = token => {
   return async dispatch => {
     try {
-      const res = await axios.get(HOST + "/sprints", {
+      let res = await axios.get(HOST + "/sprints", {
         headers: { Authorization: "jwt " + token }
+      });
+
+      res.data.sprints = res.data.sprints.map(sp => {
+        return { ...sp, start: new Date(sp.start) };
       });
       dispatch({
         type: GET_SPRINTS,
@@ -21,13 +25,14 @@ export const getSprintsAction = token => {
 export const addSprintAction = token => {
   return async dispatch => {
     try {
-      const res = await axios.post(
+      let res = await axios.post(
         HOST + "/sprints",
         {},
         {
           headers: { Authorization: "jwt " + token }
         }
       );
+      res.data.saved.start = new Date(res.data.saved.start);
       dispatch({
         type: ADD_SPRINT,
         payload: res.data.saved

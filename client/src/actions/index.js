@@ -64,17 +64,25 @@ export const getTasksAction = token => {
       });
       dispatch({
         type: GET_TASKS,
-        payload: res.data.tasks.sort((a, b) => {
-          if (a.done === b.done) {
-            if (a.star === b.star) {
-              return 0;
+        payload: res.data.tasks
+          .sort((a, b) => {
+            if (a.done === b.done) {
+              if (a.star === b.star) {
+                return 0;
+              } else {
+                return b.star;
+              }
             } else {
-              return b.star;
+              return a.done;
             }
-          } else {
-            return a.done;
-          }
-        })
+          })
+          .map(task => {
+            if (task.sprint) {
+              return { ...task, sprint: new Date(task.sprint) };
+            }
+
+            return task;
+          })
       });
     } catch (error) {
       console.log("getTasksAction error", error, token);

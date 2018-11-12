@@ -51,13 +51,13 @@ class AddSprint extends Component {
       return "";
     }
 
-    const out =
+    return (
       "Sprint " +
       this.props.sprints.sprints.length +
       "(" +
-      moment(this.props.sprints.current).fromNow() +
-      ")";
-    return out;
+      moment(this.props.sprints.current.start).fromNow() +
+      ")"
+    );
   }
 
   render() {

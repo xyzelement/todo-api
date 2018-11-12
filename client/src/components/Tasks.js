@@ -115,12 +115,9 @@ class Tasks extends React.Component {
         );
       })
       .filter(task => {
-        console.log(
-          typeof task.sprint,
-          typeof this.props.sprints.current.start
-        );
         return (
-          this.state.editMode || task.sprint === this.props.sprints.current
+          this.state.editMode ||
+          task.sprint.getTime() === this.props.sprints.current.start.getTime()
         );
       })
       .map(task => (

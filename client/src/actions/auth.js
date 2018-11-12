@@ -6,7 +6,7 @@ import {
   GET_TASKS,
   ADD_TASK,
   DELETE_TASK
-} from "../actions/types";
+} from "./types";
 
 const DEFAULT_STATE = {
   isAuthenticated: false,

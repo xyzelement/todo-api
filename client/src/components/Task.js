@@ -9,48 +9,27 @@ export default class Task extends React.Component {
 
   makeStar(task) {
     const character = task.star ? "★" : "☆";
-
     if (task.done) {
       return <span className="star">{character}</span>;
     }
 
-    if (task.star) {
-      return (
-        <span className="star star-on">
-          <a href="/" onClick={this.onClick.bind(this, "star")}>
-            {character}
-          </a>
-        </span>
-      );
-    } else {
-      return (
-        <span className="star">
-          <a href="/" onClick={this.onClick.bind(this, "star")}>
-            {character}
-          </a>
-        </span>
-      );
-    }
+    return (
+      <span className={"star" + (task.star ? " star-on" : "")}>
+        <a href="/" onClick={this.onClick.bind(this, "star")}>
+          {character}
+        </a>
+      </span>
+    );
   }
 
   makeCheck(task) {
-    if (task.done) {
-      return (
-        <span className="star star-on">
-          <a href="/" onClick={this.onClick.bind(this, "done")}>
-            ✓
-          </a>
-        </span>
-      );
-    } else {
-      return (
-        <span className="star">
-          <a href="/" onClick={this.onClick.bind(this, "done")}>
-            ✓
-          </a>
-        </span>
-      );
-    }
+    return (
+      <span className={"star" + (task.done ? " star-on" : "")}>
+        <a href="/" onClick={this.onClick.bind(this, "done")}>
+          ✓
+        </a>
+      </span>
+    );
   }
 
   makeDelete() {
@@ -102,8 +81,8 @@ export default class Task extends React.Component {
     this.setState({ editMode: false });
   }
 
-  toggleContext(arr, context) {
-    var i = arr.indexOf(context);
+  static toggleContext(arr, context) {
+    let i = arr.indexOf(context);
     if (i === -1) {
       arr.push(context);
     } else if (arr.length > 1) {
@@ -117,10 +96,11 @@ export default class Task extends React.Component {
     e.preventDefault();
 
     this.props.updateTaskAction(this.props.auth.jwtToken, this.props.task._id, {
-      context: this.toggleContext([...this.props.task.context], context)
+      context: Task.toggleContext([...this.props.task.context], context)
     });
   }
 
+  //TODO: this probably gets replaced at least somewhat with sprints.
   onStatusClick(status, e) {
     e.preventDefault();
 
@@ -155,6 +135,7 @@ export default class Task extends React.Component {
       return;
     }
 
+    //TODO: by default it's action being edited?!
     let out = {};
     out[action] = !this.props.task[action];
 
@@ -217,7 +198,7 @@ export default class Task extends React.Component {
     );
   }
 
-  makeSprint(task) {
+  static makeSprint(task) {
     if (task.sprint) return <i>[{moment(task.sprint).fromNow()}]</i>;
     else return "...";
   }
@@ -228,7 +209,7 @@ export default class Task extends React.Component {
         {this.props.mode === "edit" ? this.makeEditMode() : ""}
         {this.makeCheck(this.props.task)}
         {this.makeStar(this.props.task)}
-        {this.makeSprint(this.props.task)}
+        {Task.makeSprint(this.props.task)}
         {this.makeAction(this.props.task)}
         {this.makeAge()}
       </div>

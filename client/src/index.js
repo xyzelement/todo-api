@@ -12,7 +12,7 @@ import SignUp from "./components/SignUp";
 import SignInWrapper from "./components/SignInWrapper";
 import SignOut from "./components/SignOut";
 import Tasks from "./components/Tasks";
-import reducers from "./reducers";
+import reducers from "./actions/index_reducer";
 
 //TODO: is this the right place?
 import "./App.css";
@@ -20,7 +20,7 @@ import "./App.css";
 const initialState = {
   auth: {
     jwtToken: localStorage.getItem("JWT_TOKEN"),
-    isAuthenticated: localStorage.getItem("JWT_TOKEN") ? true : false
+    isAuthenticated: !!localStorage.getItem("JWT_TOKEN")
   }
 };
 

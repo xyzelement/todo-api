@@ -9,19 +9,13 @@ import { HOST } from "./types";
 
 export const signUpAction = formData => {
   return async dispatch => {
-    /*
-        Step 1: use formData to make http req to backend 
-        Step 2: take backend response (jwtToken)
-        Step 3: dispatch user signed up message (jwt)
-        Step 4: save token to localStorage (for react/storage)
-    */
     try {
-      // formData has the right fields because of how form fields are named
       const res = await axios.post(HOST + "/users/signup", formData);
 
       localStorage.setItem("JWT_TOKEN", res.data.token);
       dispatch({ type: AUTH_SIGNUP, payload: res.data.token });
     } catch (error) {
+      /* istanbul ignore next */
       dispatch({
         type: AUTH_ERROR,
         payload: error
@@ -39,14 +33,13 @@ export const signOutAction = () => {
 
 export const signInAction = formData => {
   return async dispatch => {
+    /* istanbul ignore next */
     try {
       // formData has the right fields because of how form fields are named
       const res = await axios.post(HOST + "/users/signin", formData);
-
       localStorage.setItem("JWT_TOKEN", res.data.token);
-
       dispatch({ type: AUTH_SIGNUP, payload: res.data.token });
-    } catch (error) {
+    } /* istanbul ignore next */ catch (error) {
       console.log(error);
       dispatch({
         type: AUTH_ERROR,
@@ -85,6 +78,7 @@ export const getTasksAction = token => {
           })
       });
     } catch (error) {
+      /* istanbul ignore next */
       console.log("getTasksAction error", error, token);
     }
   };
@@ -101,6 +95,7 @@ export const updateTaskAction = (token, id, update) => {
       });
       dispatch({ type: UPDATE_TASKS, payload: { id, update } });
     } catch (error) {
+      /* istanbul ignore next */
       console.log("updateTaskAction error", error, token, id, update);
     }
   };
@@ -113,12 +108,14 @@ export const addTaskAction = (token, update) => {
         headers: { Authorization: "jwt " + token }
       });
 
+      /* istanbul ignore else */
       if (res.data.saved) {
         dispatch({ type: ADD_TASK, payload: res.data.saved });
       } else {
         console.log("addTaskAction DID NOT SAVE", res);
       }
     } catch (error) {
+      /* istanbul ignore next */
       console.log("addTaskAction error", error, token, update);
     }
   };
@@ -134,6 +131,7 @@ export const deleteTaskAction = (token, id) => {
       });
       dispatch({ type: DELETE_TASK, payload: { id } });
     } catch (error) {
+      /* istanbul ignore next */
       console.log("deleteTaskAction error", error, token, id);
     }
   };

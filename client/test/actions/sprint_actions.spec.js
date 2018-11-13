@@ -14,7 +14,10 @@ describe("Sprint actions", () => {
 
   it("Gets the sprints and call reducer with GET_SPRINTS", async () => {
     const mockData = {
-      sprints: [1, 2, 3]
+      sprints: [
+        { start: "Mon Nov 12 2018 12:51:11 GMT-0500 (Eastern Standard Time)" },
+        { start: "Mon Nov 12 2018 12:52:23 GMT-0500 (Eastern Standard Time)" }
+      ]
     };
     mockAxios.get.mockImplementationOnce(() =>
       Promise.resolve({ data: mockData })
@@ -25,7 +28,7 @@ describe("Sprint actions", () => {
 
     expect(store.getActions()).toEqual([
       {
-        payload: [1, 2, 3],
+        payload: [{ start: expect.any(Date) }, { start: expect.any(Date) }],
         type: "GET_SPRINTS"
       }
     ]);

@@ -34,13 +34,13 @@ describe("Testing Task Component", () => {
   });
 
   it("toggleContext adds/removes contexts correctly", () => {
-    var out = Task.prototype.toggleContext(["a", "b", "c"], "b");
+    var out = Task.toggleContext(["a", "b", "c"], "b");
     expect(out).toEqual(["a", "c"]);
 
-    out = Task.prototype.toggleContext(["a", "b", "c"], "d");
+    out = Task.toggleContext(["a", "b", "c"], "d");
     expect(out).toEqual(["a", "b", "c", "d"]);
 
-    out = Task.prototype.toggleContext(["a"], "a");
+    out = Task.toggleContext(["a"], "a");
     expect(out).toEqual(["a"]);
   });
 });

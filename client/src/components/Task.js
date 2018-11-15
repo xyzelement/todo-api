@@ -139,6 +139,13 @@ export default class Task extends React.Component {
     let out = {};
     out[action] = !this.props.task[action];
 
+    // For now, sprints can only be set from the Sprints controller START
+    // so here we know it's a clearing
+    if (action === "sprint") {
+      out.sprint = null      
+    }
+
+
     this.props.updateTaskAction(
       this.props.auth.jwtToken,
       this.props.task._id,
@@ -196,11 +203,16 @@ export default class Task extends React.Component {
         {moment(this.props.task.hist[0].on).fromNow(true)}
       </span>
     );
-  }
+  };
 
-  static makeSprint(task) {
-    if (task.sprint) return <i>[{moment(task.sprint).fromNow()}]</i>;
-    else return "...";
+  makeSprint(task) {
+
+    if(!task.sprint) return ""
+
+    return(
+      <i>[{moment(task.sprint).fromNow()}]
+        <a href="/" onClick={this.onClick.bind(this, "sprint")}>X</a>
+      </i>);
   }
 
   render() {
@@ -209,7 +221,7 @@ export default class Task extends React.Component {
         {this.props.mode === "edit" ? this.makeEditMode() : ""}
         {this.makeCheck(this.props.task)}
         {this.makeStar(this.props.task)}
-        {Task.makeSprint(this.props.task)}
+        {this.makeSprint(this.props.task)}
         {this.makeAction(this.props.task)}
         {this.makeAge()}
       </div>

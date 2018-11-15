@@ -208,6 +208,7 @@ export default class Task extends React.Component {
   makeSprint(task) {
 
     if(!task.sprint) return ""
+    if(this.props.mode === "work") return ""
 
     return(
       <i>[{moment(task.sprint).fromNow()}]

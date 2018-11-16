@@ -198,7 +198,9 @@ export default class Task extends React.Component {
     );
   }
 
-  static makeSprint(task) {
+  makeSprint(task) {
+    if (!this.props.mode) return "";
+
     if (task.sprint) return <i>[{moment(task.sprint).fromNow()}]</i>;
     else return "...";
   }
@@ -209,7 +211,7 @@ export default class Task extends React.Component {
         {this.props.mode === "edit" ? this.makeEditMode() : ""}
         {this.makeCheck(this.props.task)}
         {this.makeStar(this.props.task)}
-        {Task.makeSprint(this.props.task)}
+        {this.makeSprint(this.props.task)}
         {this.makeAction(this.props.task)}
         {this.makeAge()}
       </div>

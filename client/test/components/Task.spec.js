@@ -43,4 +43,25 @@ describe("Testing Task Component", () => {
     out = Task.toggleContext(["a"], "a");
     expect(out).toEqual(["a"]);
   });
+
+  it("makeSprint does not show it in work mode", () => {
+    //TODO: this test may not be ready yet
+    const ConnectedComponent = connect(mapStateToProps)(Task);
+    const wrapper = shallowWithState(
+      <ConnectedComponent
+      //mode="work"
+      />,
+      {
+        //auth: { isAuthenticated: true },
+        //task: { done: false, context: [], hist: [{ on: new Date() }] }
+      }
+    );
+
+    let item = {
+      sprint: new Date()
+    };
+    let task = wrapper; //.find("Task");
+    console.log(task);
+    expect(task.makeSprint(item)).toEqual("");
+  });
 });

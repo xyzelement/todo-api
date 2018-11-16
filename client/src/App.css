@@ -1,94 +1,88 @@
 body {
   background-color: white;
   font-family: monospace;
+  line-height: 3;
 }
 
-.star {
+/* The start (and also done) toggles on an action */
+.star,
+.star a {
   width: 25px;
   display: inline-block;
   text-align: center;
   color: gainsboro;
+  text-decoration: none;
 }
 
-.star a {
+.star-on a {
+  color: black;
+}
+
+/* More like - header items along the top: both context and mode */
+.context a {
   text-decoration: none;
   color: gainsboro;
 }
 
-.done {
-  color: gainsboro;
-}
-
-.done a {
-  color: gainsboro;
-  text-decoration: none;
-}
-
+/* This is applied to show that Edit or Inbox are selected */
 .context-selected a {
   color: black;
   text-decoration: none;
 }
 
+/* This is the "label" part of our input fields - AddTask, signin, etc*/
 .custom-input-label {
   display: inline-block;
   width: 20%;
   border-width: 0px;
   font-family: monospace;
 }
-.star-on a {
-  color: black;
-}
 
-.action {
+/* The action input (default read only) w. action text*/
+.action input {
   margin-left: 4px;
   margin-right: 4px;
-}
-
-.task-age {
-  color: gainsboro;
-  font-size: 1em;
-}
-
-.task {
-  font-size: 1.6em;
-  line-height: 1.6em;
-}
-
-.action input {
-  width: 50%;
+  width: 90%;
   border-width: 0px;
   font-family: monospace;
-
-  font-size: 1.6em;
+  font-size: 2.6em;
 }
 
-.done input {
-  color: gainsboro;
-}
-
+/* Action text: edit mode */
 .action input:read-write {
   border-bottom-width: 2px;
   font-weight: bold;
 }
 
+/* Gray out text for completed actions. */
+.done input {
+  color: gainsboro;
+}
+
+/* Obvious... */
+.task-age {
+  color: gainsboro;
+  font-size: 1em;
+}
+
+/* The text-box for new item creation */
 .add-item input:read-write {
   align-content: left;
 }
+
+/* Allows me to keep forms in-line, not sure why I care */
 form {
   display: inline;
 }
 
-.context a {
-  text-decoration: none;
-  color: gainsboro;
-}
-
+/* Sprint label on top-right of edit mode, when active */
 .sprint {
-  color: gainsboro;
+  color: black;
   float: right;
 }
 
+/* sprint start/stop button */
 .sprint a {
-  text-decoration: none;
   color: gainsboro;
+  text-decoration: none;
 }

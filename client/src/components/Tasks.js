@@ -117,9 +117,9 @@ class Tasks extends React.Component {
       .filter(task => {
         //In inbox/edit mode, show all tasks
         // otherwise, only show modes from current sprint
-        if (this.state.editMode) return true
-        if (!task.sprint) return false
-        return (          
+        if (this.state.editMode) return true;
+        if (!task.sprint) return false;
+        return (
           task.sprint.getTime() === this.props.sprints.current.start.getTime()
         );
       })
@@ -144,7 +144,7 @@ class Tasks extends React.Component {
         {this.renderHeaders()}
         <br />
         {this.renderAddBox()}
-        <br />
+
         {this.renderTasks()}
         <br />
       </div>

@@ -25,6 +25,19 @@ class AddSprint extends Component {
 
   async onStop(e) {
     e.preventDefault();
+
+    //Don't allow a stop sprint if there are un-done tasks in it
+    //TODO: this should be done server-side eventually
+    const undone = this.props.tasks.filter(task => {
+      if (!task.sprint) return false
+      if (task.done) return false
+      return (task.sprint.getTime() === this.props.sprints.current.start.getTime())
+    })
+    
+    if (undone.length>0){
+      return
+    }
+
     await this.props.stopSprintAction(
       this.props.auth.jwtToken,
       this.props.sprints.current._id

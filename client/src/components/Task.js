@@ -139,6 +139,12 @@ export default class Task extends React.Component {
     let out = {};
     out[action] = !this.props.task[action];
 
+    // For now, sprints can only be set from the Sprints controller START
+    // so here we know it's a clearing
+    if (action === "sprint") {
+      out.sprint = null;
+    }
+
     this.props.updateTaskAction(
       this.props.auth.jwtToken,
       this.props.task._id,
@@ -199,10 +205,17 @@ export default class Task extends React.Component {
   }
 
   makeSprint(task) {
-    if (!this.props.mode) return "";
+    if (!task.sprint) return "";
+    if (this.props.mode === "work") return "";
 
-    if (task.sprint) return <i>[{moment(task.sprint).fromNow()}]</i>;
-    else return "...";
+    return (
+      <i>
+        [{moment(task.sprint).fromNow()}]
+        <a href="/" onClick={this.onClick.bind(this, "sprint")}>
+          X
+        </a>
+      </i>
+    );
   }
 
   render() {
